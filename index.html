@@ -36,6 +36,7 @@
       background: url('https://i.ibb.co/RGVxzxwL/2025-06-20-132934582.png') no-repeat center center fixed;
       background-size: cover;
       color: rgb(55, 11, 175);
+      background-color: rgb(0,0,0);
     }
 
     .container {
@@ -214,7 +215,7 @@
 <body>
   <div class="container">
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('stats')">Stats</div>
+      <div data-key="stats" class="tab active" onclick="switchTab('stats')">Stats</div>
       <div class="tab" onclick="switchTab('tokens')">Tokens</div>
       <!-- <div class="tab" onclick="switchTab('npc')">NPC</div> -->
       <div class="tab" onclick="switchTab('settings')">Settings</div>
@@ -246,8 +247,9 @@
         <input type="checkbox" id="fastTrain" style="display: none;">
       </div>
       <div class="form-group">
-        <label>Faster Stat (Levels)</label>
+        <label id="Faster">Faster Stat (Levels)</label>
         <input type="number" id="statUpgrade" min="0" max="5" placeholder="Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3">
+        <button data-key="Count by %" id="Change" onclick="change()" style="width: fit-content;margin-top: -90%;height: 1%;padding-left: 5px;padding-right: 5px;display: inline-block;padding-top: 5px;padding-bottom: 5px;font-size: 16px;">Count by %</button>
       </div>
       <div class="form-group">
         <label>Stat per Tick</label>
@@ -323,19 +325,24 @@
       document.getElementById('tokens-tab').style.display = 'none';
       document.getElementById('settings-tab').style.display = 'none';
       document.getElementById('Calculate').style.display = 'block';
+      document.getElementById('result').style.display = 'block';
       if (tab === 'stats') {
         document.getElementById('stats-tab').style.display = 'block';
         document.querySelectorAll('.tab')[0].classList.add('active');
         document.querySelector('h1').textContent = 'Stats Calculator';
+        document.querySelector('.tab.active').dataset.key = 'Stats';
       } else if (tab === 'tokens') {
         document.getElementById('tokens-tab').style.display = 'block';
         document.querySelectorAll('.tab')[1].classList.add('active');
         document.querySelector('h1').textContent = 'Tokens Calculator';
+        document.querySelector('.tab.active').dataset.key = 'Tokens';
       } else {
         document.getElementById('settings-tab').style.display = 'block';
         document.querySelectorAll('.tab')[2].classList.add('active');
         document.querySelector('h1').textContent = 'Settings';
         document.getElementById('Calculate').style.display = 'none';
+        document.getElementById('result').style.display = 'none';
+        document.querySelector('.tab.active').dataset.key = 'Settings';
       }
     }
 
@@ -427,11 +434,30 @@
       saveForm();
     }
 
+    function change() {
+      const changeButton = document.getElementById('Change');
+
+      if (changeButton.dataset.key === 'Count by %') {
+        changeButton.textContent = 'Count by Levels';
+        changeButton.dataset.key = 'Count by Levels';
+        document.getElementById('statUpgrade').max = 25;
+        document.getElementById('Faster').textContent = 'Faster Stat (%)';
+        document.getElementById('statUpgrade').placeholder = 'Write your Upgrade Percent in Level Skill Tree > Faster Stat, like 15';
+      } else {
+        changeButton.dataset.key = 'Count by %';
+        changeButton.textContent = 'Count by %';
+        document.getElementById('statUpgrade').max = 5;
+        document.getElementById('Faster').textContent = 'Faster Stat (Levels)';
+        document.getElementById('statUpgrade').placeholder = 'Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3';
+      }
+    }
+
     async function calculate() {
       const dynamicTimestamp = document.getElementById('dynamicTimestamp').checked;
       const myCalculateId = ++currentCalculateId;
 
-      const activeTab = document.querySelector('.tab.active').textContent;
+      const activeTab = document.querySelector('.tab.active').dataset.key;
+      const changeButton = document.getElementById('Change').textContent;
       let result = '';
       let resultTitle = '';
 
@@ -455,7 +481,13 @@
         };
         const statTickSeconds = statTickMap[statType] || 1;
 
-        const tick = Math.floor(statTickSeconds/((fastTrain?1.25:1)+statBoost/20)*100)/100;
+        if (changeButton === 'Count by %') {
+          statRealBoost = statBoost / 20;
+        } else {
+          statRealBoost = statBoost / 100;
+        }
+
+        const tick = Math.floor(statTickSeconds/((fastTrain?1.25:1)+(statRealBoost))*100)/100;
         const gainPerSecond = perTick / tick;
 
         if (goalType === 'amountToTime') {
