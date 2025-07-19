@@ -3,30 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SPTL Stats/Tokens Calculator is a user-friendly online tool designed for gamers to quickly calculate the time needed to level up various character stats and the amount of tokens required. Enter your current stats, target goals, and any speed boosts to find out how long it will take to reach your desired progress. Supports multiple stat types, tokens, and convenient input formats for time and numbers. Helps you plan your game progression efficiently and save valuable time!" />
-  <meta name="keywords" content="HTML, JavaScript, SPTL, Calculator" />
+  <meta name="description" content="SPTL Stats/Tokens Calculator is a fast, user-friendly tool to calculate how long it takes to train stats and collect tokens in Super Power Training League. Easily input your current values and goals, including boosts, and get accurate results!" />
+  <meta name="keywords" content="SPTL, Super Power Training League, stats calculator, tokens calculator, training calculator, Roblox tools, online calculator, stat tracker, game helper, boost, progression" />
   <meta name="author" content="arturwol" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="icon" href="https://tr.rbxcdn.com/180DAY-28f938ee65d414294a66c564991269e2/256/256/Image/Webp/noFilter" type="image/x-icon">
+  <meta name="theme-color" content="#0e021e" />
+  <meta name="application-name" content="SPTL Stats/Tokens Calculator" />
+  <link rel="canonical" href="https://sptlcalculator.netlify.app/" />
+  <link rel="icon" href="https://i.ibb.co/KS0m9JY/image.png" type="image/x-icon" />
 
-  <!-- Open Graph Tags -->
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SPTL Calculator" />
+
+  <!-- Microsoft -->
+  <meta name="msapplication-TileColor" content="#0e021e" />
+  <meta name="msapplication-TileImage" content="https://i.ibb.co/KS0m9JY/image.png" />
+
+  <!-- Open Graph / Facebook / Discord / LinkedIn -->
   <meta property="og:title" content="SPTL Stats/Tokens Calculator" />
-  <meta property="og:description" content="SPTL Stats/Tokens Calculator is a user-friendly online tool designed for gamers to quickly calculate the time needed to level up various character stats and the amount of tokens required. Enter your current stats, target goals, and any speed boosts to find out how long it will take to reach your desired progress. Supports multiple stat types, tokens, and convenient input formats for time and numbers. Helps you plan your game progression efficiently and save valuable time!" />
+  <meta property="og:description" content="Easily calculate your stat training time and required tokens in SPTL. Plan your progress efficiently with this online calculator." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sptlcalculator.netlify.app" />
-  <meta property="og:image" content="https://tr.rbxcdn.com/180DAY-40025da375baf792b5c49e5be1d1f3d0/768/432/Image/Webp/noFilter" />
+  <meta property="og:url" content="https://sptlcalculator.netlify.app/" />
+  <meta property="og:image" content="https://i.ibb.co/svG0dydt/image.png" />
+  <meta property="og:image:alt" content="SPTL Calculator logo and preview" />
   <meta property="og:site_name" content="SPTL Stats/Tokens Calculator" />
   <meta property="og:locale" content="en_US" />
 
-  <!-- Twitter Meta Tags -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="SPTL Stats/Tokens Calculator" />
-  <meta name="twitter:description" content="SPTL Stats/Tokens Calculator is a user-friendly online tool designed for gamers to quickly calculate the time needed to level up various character stats and the amount of tokens required. Enter your current stats, target goals, and any speed boosts to find out how long it will take to reach your desired progress. Supports multiple stat types, tokens, and convenient input formats for time and numbers. Helps you plan your game progression efficiently and save valuable time!" />
-  <meta name="twitter:image" content="https://tr.rbxcdn.com/180DAY-40025da375baf792b5c49e5be1d1f3d0/768/432/Image/Webp/noFilter" />
+  <meta name="twitter:description" content="A simple calculator to measure stat growth time and token requirements in Super Power Training League." />
+  <meta name="twitter:image" content="https://i.ibb.co/svG0dydt/image.png" />
+  <meta name="twitter:image:alt" content="SPTL Stats Calculator cover image" />
   <meta name="twitter:site" content="@artnrwol" />
-  
+
   <title>SPTL Stats/Tokens Calculator</title>
   <style>
     html, body {
@@ -215,7 +227,7 @@
 <body>
   <div class="container">
     <div class="tabs">
-      <div data-key="stats" class="tab active" onclick="switchTab('stats')">Stats</div>
+      <div data-key="Stats" class="tab active" onclick="switchTab('stats')">Stats</div>
       <div class="tab" onclick="switchTab('tokens')">Tokens</div>
       <!-- <div class="tab" onclick="switchTab('npc')">NPC</div> -->
       <div class="tab" onclick="switchTab('settings')">Settings</div>
@@ -242,7 +254,7 @@
       <div class="form-group">
         <div class="custom-checkbox" onclick="toggleCheckbox('fastTrain')">
           <div class="checkbox-box" id="fastTrain-box"></div>
-          <span>Fast Train Gamepass</span>
+          <span>"Faster Train" Gamepass</span>
         </div>
         <input type="checkbox" id="fastTrain" style="display: none;">
       </div>
@@ -529,7 +541,11 @@
           const seconds = parseTime(goalValueRaw);
           const gained = gainPerSecond * seconds;
           result = `You will gain ${formatNumber(gained)} ${statType} in ${formatTime(seconds)}`;
-          resultTitle = `You will gain ${formatNumber(gained)} ${statType} in ${formatTime(seconds)}`;
+
+          const targetDate = new Date(Date.now() + seconds * 1000);
+          const pad = n => n.toString().padStart(2, '0');
+          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
+          resultTitle = `You will gain ${formatNumber(gained)} ${statType} at ${localDateStr}`;
         }
 
       } else {
@@ -579,7 +595,11 @@
           const seconds = parseTime(valueRaw);
           const totalTokens = (seconds / interval) * tokensPer;
           result = `You will gain ${formatNumber(totalTokens)} tokens in ${formatTime(seconds)}`;
-          resultTitle = `You will gain ${formatNumber(totalTokens)} tokens in ${formatTime(seconds)}`;
+
+          const targetDate = new Date(Date.now() + seconds * 1000);
+          const pad = n => n.toString().padStart(2, '0');
+          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
+          resultTitle = `You will gain ${formatNumber(totalTokens)} tokens at ${localDateStr}`;
         }
       }
 
