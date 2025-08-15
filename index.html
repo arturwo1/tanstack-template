@@ -1,659 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SPTL Stats/Tokens Calculator is a fast, user-friendly tool to calculate how long it takes to train stats and collect tokens in Super Power Training League. Easily input your current values and goals, including boosts, and get accurate results!" />
-  <meta name="keywords" content="SPTL, Super Power Training League, stats calculator, tokens calculator, training calculator, Roblox tools, online calculator, stat tracker, game helper, boost, progression" />
-  <meta name="author" content="arturwol" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0e021e" />
-  <meta name="application-name" content="SPTL Stats/Tokens Calculator" />
-  <link rel="canonical" href="https://sptlcalculator.netlify.app/" />
-  <link rel="icon" href="https://i.ibb.co/KS0m9JY/image.png" type="image/x-icon" />
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Apple -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="SPTL Calculator" />
+    <!-- Basic -->
+    <title>Calculators Hub — Quick Game Progress Tools</title>
+    <meta name="description" content="A compact hub with fast links to your game calculators — stats, tokens, training planner and more. Black + red theme, ready for use on desktop and mobile.">
+    <meta name="keywords" content="calculator, game calculator, stats calculator, tokens calculator, planner, online tools, progress tracker">
+    <meta name="author" content="arturwol">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b0b0b">
+    <link rel="canonical" href="https://your-site.example/">
+    <link rel="icon" href="https://i.ibb.co/KS0m9JY/image.png" type="image/x-icon">
 
-  <!-- Microsoft -->
-  <meta name="msapplication-TileColor" content="#0e021e" />
-  <meta name="msapplication-TileImage" content="https://i.ibb.co/KS0m9JY/image.png" />
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Calculators Hub">
 
-  <!-- Open Graph / Facebook / Discord / LinkedIn -->
-  <meta property="og:title" content="SPTL Stats/Tokens Calculator" />
-  <meta property="og:description" content="Easily calculate your stat training time and required tokens in SPTL. Plan your progress efficiently with this online calculator." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sptlcalculator.netlify.app/" />
-  <meta property="og:image" content="https://i.ibb.co/svG0dydt/image.png" />
-  <meta property="og:image:alt" content="SPTL Calculator logo and preview" />
-  <meta property="og:site_name" content="SPTL Stats/Tokens Calculator" />
-  <meta property="og:locale" content="en_US" />
+    <!-- Microsoft -->
+    <meta name="msapplication-TileColor" content="#0b0b0b">
+    <meta name="msapplication-TileImage" content="https://i.ibb.co/KS0m9JY/image.png">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SPTL Stats/Tokens Calculator" />
-  <meta name="twitter:description" content="A simple calculator to measure stat growth time and token requirements in Super Power Training League." />
-  <meta name="twitter:image" content="https://i.ibb.co/svG0dydt/image.png" />
-  <meta name="twitter:image:alt" content="SPTL Stats Calculator cover image" />
-  <meta name="twitter:site" content="@artnrwol" />
+    <!-- Open Graph / Facebook / Discord / LinkedIn -->
+    <meta property="og:title" content="Calculators Hub — Quick Game Progress Tools">
+    <meta property="og:description" content="Open fast links to your calculators: stats, tokens, training planner and more. Save time and plan progress with ease.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-site.example/">
+    <meta property="og:image" content="https://i.ibb.co/svG0dydt/image.png">
+    <meta property="og:image:alt" content="Calculators Hub preview image">
+    <meta property="og:site_name" content="Calculators Hub">
+    <meta property="og:locale" content="en_US">
 
-  <title>SPTL Stats/Tokens Calculator</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background: url('https://i.ibb.co/RGVxzxwL/2025-06-20-132934582.png') no-repeat center center fixed;
-      background-size: cover;
-      color: rgb(55, 11, 175);
-      background-color: rgb(0,0,0);
-    }
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculators Hub — Quick Game Progress Tools">
+    <meta name="twitter:description" content="Open fast links to your calculators: stats, tokens, planner and more. Black + red theme.">
+    <meta name="twitter:image" content="https://i.ibb.co/svG0dydt/image.png">
+    <meta name="twitter:image:alt" content="Calculators Hub preview image">
+    <meta name="twitter:site" content="@artnrwol">
 
-    .container {
-      position: absolute;
-      top: 5%;
-      left: 5%;
-      width: 90%;
-      height: 90%;
-      background-color: rgba(2,0,14, 0.8);
-      border-radius: 12px;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      scrollbar-width: none
-    }
+    <style>
+      :root{--bg:#0b0b0b;--card:#0f0f10;--accent:#d32f2f;--accent-2:#b71c1c;--muted:#d9d9d9;--glass:rgba(255,255,255,0.03);--radius:12px}
+      html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:linear-gradient(180deg,#070707 0%,#0d0d0d 100%);color:var(--muted)}
+      .wrap{max-width:1100px;margin:36px auto;padding:20px;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(8,0,0,0.4));border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(211,47,47,0.06)}
+      header{display:flex;align-items:center;gap:16px}
+      .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#111;font-weight:800}
+      h1{margin:0;font-size:1.4rem;color:#fff}
+      p.lead{margin:4px 0 0;color:#e6e6e6;opacity:0.95}
 
-    .tabs {
-      display: flex;
-      margin-bottom: 10px;
-    }
+      .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+      .card{background:linear-gradient(180deg,var(--glass),transparent);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:8px;min-height:110px;transition:transform .16s ease,box-shadow .16s ease}
+      .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6),0 8px 24px rgba(211,47,47,0.06)}
+      .card a{color:inherit;text-decoration:none}
+      .card .title{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff}
+      .card .desc{font-size:0.92rem;color:#e6e6e6;opacity:0.9}
+      .tag{margin-left:auto;font-size:0.75rem;padding:6px 8px;border-radius:8px;background:rgba(211,47,47,0.12);color:var(--accent);font-weight:700}
 
-    .tab {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      cursor: pointer;
-      background-color: rgb(23, 5, 60);
-      border: 1px solid rgb(45, 20, 90);
-      border-radius: 6px;
-      color: rgb(94,28,159);
-      transition: background-color 0.2s ease;
-    }
+      footer{margin-top:22px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center;color:#bdbdbd}
+      .small{font-size:0.9rem;color:#cfcfcf}
 
-    .tab.active {
-      background-color: rgb(40, 15, 100);
-      font-weight: bold;
-      color: rgb(94,28,159);
-    }
+      @media (max-width:780px){.wrap{margin:16px}h1{font-size:1.2rem}}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="logo">CH</div>
+        <div>
+          <h1>Calculators Hub</h1>
+          <p class="lead">Fast links to your calculators — stats, tokens, training planner and more. Black + red theme, mobile-friendly.</p>
+        </div>
+      </header>
 
-    .tab:hover {
-      background-color: rgb(33, 10, 80);
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    #fastTrain {
-      width: 18px;
-      height: 18px;
-      accent-color: rgb(23, 5, 60);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    option, input, select {
-      width: 100%;
-      padding: 8px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      background-color: rgb(58,3,101,0.1);
-      color: rgb(94,28,159);
-      font-weight: bold;
-    }
-
-    input::placeholder {
-      color: rgb(53, 16, 90);
-      font-weight: normal;
-    }
-
-    button {
-      padding: 12px;
-      font-size: 1.2rem;
-      width: 100%;
-      margin-top: 20px;
-      border: none;
-      background-color: rgb(17, 2, 59);
-      color: rgb(55, 8, 182);
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: rgb(25, 3, 85);
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    .custom-select {
-      position: relative;
-      user-select: none;
-    }
-
-    .custom-select .selected {
-      padding: 8px;
-      border-radius: 5px;
-      background-color: rgba(58, 3, 101, 0.1);
-      color: rgb(94, 28, 159);
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .custom-select .options {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: rgb(23, 5, 60);
-      border: 1px solid rgb(45, 20, 90);
-      border-radius: 5px;
-      z-index: 10;
-      display: none;
-      max-height: 200px;
-    }
-
-    .custom-select .options div {
-      padding: 8px;
-      cursor: pointer;
-      color: rgb(94, 28, 159);
-    }
-
-    .custom-select .options div:hover {
-      background-color: rgb(33, 10, 80);
-    }
-
-    .custom-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      user-select: none;
-      color: rgb(94, 28, 159);
-      font-weight: bold;
-    }
-
-    .checkbox-box {
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgb(94, 28, 159);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      transition: background-color 0.2s ease;
-    }
-
-    .checkbox-box.checked {
-      background-color: rgb(94, 28, 159);
-    }
-
-    .checkbox-box::after {
-      content: '';
-      width: 10px;
-      height: 10px;
-      display: none;
-      background-color: rgb(23, 5, 60);
-      border-radius: 2px;
-    }
-
-    .checkbox-box.checked::after {
-      display: block;
-    }
-
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="tabs">
-      <div data-key="Stats" class="tab active" onclick="switchTab('stats')">Stats</div>
-      <div class="tab" onclick="switchTab('tokens')">Tokens</div>
-      <!-- <div class="tab" onclick="switchTab('npc')">NPC</div> -->
-      <div class="tab" onclick="switchTab('settings')">Settings</div>
-    </div>
-
-    <h1 style="text-align: center">Stats Calculator</h1>
-
-    <div id="stats-tab">
-      <div class="form-group">
-        <label>Select your current Stat</label>
-        <div class="custom-select" id="customStatSelect">
-          <div class="selected">Power</div>
-          <div class="options">
-            <div data-value="Power">Power</div>
-            <div data-value="Health">Health</div>
-            <div data-value="Defense">Defense</div>
-            <div data-value="Psychics">Psychics</div>
-            <div data-value="Magic">Magic</div>
-            <div data-value="Mobility">Mobility</div>
+      <main>
+        <div class="grid" aria-label="Calculator links">
+          <!-- Replace href values with your actual calculator URLs -->
+          <div class="card">
+            <a href="/SPTSC" target="_blank" rel="noopener">
+              <div class="title">💥Super Power Training Simulator Classic<span class="tag">SPTS</span></div>
+              <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time and time-to-goal.</div>
+            </a>
           </div>
-        </div>
-        <input type="hidden" id="statType" value="Power">
-      </div>
-      <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('fastTrain')">
-          <div class="checkbox-box" id="fastTrain-box"></div>
-          <span>"Faster Train" Gamepass</span>
-        </div>
-        <input type="checkbox" id="fastTrain" style="display: none;">
-      </div>
-      <div class="form-group">
-        <label id="Faster">Faster Stat (Levels)</label>
-        <input type="number" id="statUpgrade" min="0" max="5" placeholder="Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3">
-        <button data-key="Count by %" id="Change" onclick="change()" style="width: fit-content;margin-top: -90%;height: 1%;padding-left: 5px;padding-right: 5px;display: inline-block;padding-top: 5px;padding-bottom: 5px;font-size: 16px;">Count by %</button>
-      </div>
-      <div class="form-group">
-        <label>Stat per Tick</label>
-        <input type="text" id="perTick" placeholder="Write how much you getting this stat, like 2.08k">
-      </div>
-      <div class="form-group">
-        <label>Current Stat</label>
-        <input type="text" id="currentStat" placeholder="Write amount of current stat, like 58.5m">
-      </div>
-      <div class="form-group">
-        <div class="custom-select" id="customStatSelect">
-          <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
-          <div class="options">
-            <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
-            <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
+
+          <div class="card">
+            <a href="/SPTLC" target="_blank" rel="noopener">
+              <div class="title">Super Power Training League<span class="tag">SPTL</span></div>
+              <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time and time-to-goal.</div>
+            </a>
           </div>
-        </div>
-        <input type="hidden" id="goalType" value="amountToTime">
-        <div class="form-group">
-          <input type="text" id="goalValue" placeholder="Write your goal value here">
-        </div>
-      </div>
+
+        <section style="margin-top:18px">
+          <details>
+            <summary style="cursor:pointer;color:#fff;font-weight:700">About this hub</summary>
+            <p style="margin-top:8px;color:#e6e6e6;line-height:1.45">This hub provides quick access to your calculators. Links open in a new tab. Replace the <code>href</code> values in the HTML with your real calculator URLs. If you want, I can automatically insert your URLs and add thumbnail previews for each card.</p>
+          </details>
+        </section>
+      </main>
+      <footer>
+        <div class="small"><strong style="color:var(--accent)">© Calculators Hub — created by @arturwol</strong></div>
+      </footer>
     </div>
-
-    <div id="tokens-tab" style="display: none">
-      <div class="form-group">
-        <label>Tick per Tokens</label>
-        <input type="number" id="tokenInterval" placeholder="Write how much time you wait to get tokens, like 30" min="35" max="60">
-      </div>
-      <div class="form-group">
-        <label>Tokens per Tick</label>
-        <input type="text" id="tokensPerInterval" placeholder="Write how much you getting tokens">
-      </div>
-      <div class="form-group">
-        <label>Current Tokens</label>
-        <input type="text" id="currentToken" placeholder="Write amount of current tokens, like 58.5m">
-      </div>
-      <div class="form-group">
-        <div class="custom-select" id="customTokenSelect">
-          <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
-          <div class="options">
-            <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
-            <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
-          </div>
-        </div>
-        <input type="hidden" id="tokenGoalType" value="amountToTime">
-        <div class="form-group">
-          <input type="text" id="tokenGoalValue" placeholder="Write your goal value here">
-        </div>
-      </div>
-    </div>
-
-    <div id="settings-tab" style="display: none">
-      <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('dynamicTimestamp')">
-          <div class="checkbox-box" id="dynamicTimestamp-box"></div>
-          <span>Dynamic Timestamp</span>
-        </div>
-        <input type="checkbox" id="dynamicTimestamp" style="display: none;">
-      </div>
-    </div>
-
-    <button id="Calculate" onclick="calculate()">Calculate</button>
-    <div class="result" id="result"></div>
-    <label>made by @arturwol</label>
-  </div>
-  <script>
-    let currentCalculateId = 0;
-
-    function switchTab(tab) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.getElementById('stats-tab').style.display = 'none';
-      document.getElementById('tokens-tab').style.display = 'none';
-      document.getElementById('settings-tab').style.display = 'none';
-      document.getElementById('Calculate').style.display = 'block';
-      document.getElementById('result').style.display = 'block';
-      if (tab === 'stats') {
-        document.getElementById('stats-tab').style.display = 'block';
-        document.querySelectorAll('.tab')[0].classList.add('active');
-        document.querySelector('h1').textContent = 'Stats Calculator';
-        document.querySelector('.tab.active').dataset.key = 'Stats';
-      } else if (tab === 'tokens') {
-        document.getElementById('tokens-tab').style.display = 'block';
-        document.querySelectorAll('.tab')[1].classList.add('active');
-        document.querySelector('h1').textContent = 'Tokens Calculator';
-        document.querySelector('.tab.active').dataset.key = 'Tokens';
-      } else {
-        document.getElementById('settings-tab').style.display = 'block';
-        document.querySelectorAll('.tab')[2].classList.add('active');
-        document.querySelector('h1').textContent = 'Settings';
-        document.getElementById('Calculate').style.display = 'none';
-        document.getElementById('result').style.display = 'none';
-        document.querySelector('.tab.active').dataset.key = 'Settings';
-      }
-    }
-
-    function parseNumber(value) {
-      if (!value) return 0;
-      value = value.toString().replace(/\s+/g, '').toLowerCase();
-      const suffixes = {k: 1e3, m: 1e6, b: 1e9, t: 1e12, qd: 1e15, qa: 1e15, qn: 1e18, qi: 1e18, sx: 1e21, sp: 1e24, oc: 1e27, o: 1e27, no: 1e30, n: 1e30};
-      const match = value.match(/^([\d.]+)([a-z]*)$/);
-      if (!match) return parseFloat(value);
-      const num = parseFloat(match[1]);
-      const suffix = match[2];
-      return num * (suffixes[suffix] || 1);
-    }
-
-    function parseTime(value) {
-      if (!value) return 0;
-      value = value.toLowerCase().replace(/\s+/g, '');
-      let seconds = 0;
-      const matchAll = value.matchAll(/(\d+)(d|h|m|s)/g);
-      for (const [, num, unit] of matchAll) {
-        const n = parseInt(num);
-        if (unit === 'd') seconds += n * 86400;
-        else if (unit === 'h') seconds += n * 3600;
-        else if (unit === 'm') seconds += n * 60;
-        else if (unit === 's') seconds += n;
-      }
-      return seconds;
-    }
-
-    function formatTime(seconds) {
-      seconds = Math.max(0, Math.floor(seconds));
-      const d = Math.floor(seconds / 86400);
-      const h = Math.floor((seconds % 86400) / 3600);
-      const m = Math.floor((seconds % 3600) / 60);
-      const s = seconds % 60;
-      return `${d}d ${h}h ${m}m ${s}s`;
-    }
-
-    function formatNumber(n) {
-      const suffixes = ["", "K", "M", "B", "T", "Qd", "Qi", "Sx", "Sp", "Oc", "No"];
-      let i = 0;
-      while (n >= 1000 && i < suffixes.length - 1) {
-        n /= 1000;
-        i++;
-      }
-      return n.toFixed(2) + suffixes[i];
-    }
-
-    function saveForm() {
-      const inputs = document.querySelectorAll('input, select');
-      inputs.forEach(input => {
-        localStorage.setItem(input.id, input.type === 'checkbox' ? input.checked : input.value);
-      });
-    }
-
-    function loadForm() {
-      const inputs = document.querySelectorAll('input, select');
-      inputs.forEach(input => {
-        const value = localStorage.getItem(input.id);
-        if (value !== null) {
-          if (input.type === 'checkbox') input.checked = value === 'true';
-          else input.value = value;
-        }
-      });
-    }
-
-    function updateCustomCheckboxes() {
-      document.querySelectorAll('input[type=checkbox]').forEach(input => {
-        const box = document.getElementById(input.id + '-box');
-        if (box) box.classList.toggle('checked', input.checked);
-      });
-    }
-
-    function updateCustomSelects() {
-      document.querySelectorAll('.custom-select').forEach(select => {
-        const selected = select.querySelector('.selected');
-        const hiddenInput = select.nextElementSibling;
-        if (selected && hiddenInput) {
-          selected.textContent = hiddenInput.value;
-        }
-      });
-    }
-
-    function toggleCheckbox(id) {
-      const checkbox = document.getElementById(id);
-      const box = document.getElementById(id + '-box');
-      checkbox.checked = !checkbox.checked;
-      box.classList.toggle('checked', checkbox.checked);
-      saveForm();
-    }
-
-    function change() {
-      const changeButton = document.getElementById('Change');
-
-      if (changeButton.dataset.key === 'Count by %') {
-        changeButton.textContent = 'Count by Levels';
-        changeButton.dataset.key = 'Count by Levels';
-        document.getElementById('statUpgrade').max = 25;
-        document.getElementById('Faster').textContent = 'Faster Stat (%)';
-        document.getElementById('statUpgrade').placeholder = 'Write your Upgrade Percent in Level Skill Tree > Faster Stat, like 15';
-      } else {
-        changeButton.dataset.key = 'Count by %';
-        changeButton.textContent = 'Count by %';
-        document.getElementById('statUpgrade').max = 5;
-        document.getElementById('Faster').textContent = 'Faster Stat (Levels)';
-        document.getElementById('statUpgrade').placeholder = 'Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3';
-      }
-    }
-
-    async function calculate() {
-      const dynamicTimestamp = document.getElementById('dynamicTimestamp').checked;
-      const myCalculateId = ++currentCalculateId;
-
-      const activeTab = document.querySelector('.tab.active').dataset.key;
-      const changeButton = document.getElementById('Change').textContent;
-      let result = '';
-      let resultTitle = '';
-
-      if (activeTab === 'Stats') {
-        const statType = document.getElementById('statType').value;
-        const fastTrain = document.getElementById('fastTrain').checked;
-        const statBoost = parseFloat(document.getElementById('statUpgrade').value || 0);
-        const perTick = parseNumber(document.getElementById('perTick').value);
-        const currentStat = parseNumber(document.getElementById('currentStat').value);
-        const goalType = document.getElementById('goalType').value;
-        const goalValueRaw = document.getElementById('goalValue').value;
-        const goal = parseNumber(goalValueRaw);
-
-        const statTickMap = {
-          Power: 1,
-          Defense: 1,
-          Magic: 1,
-          Health: 1.2,
-          Psychics: 1.2,
-          Mobility: 1.4
-        };
-        const statTickSeconds = statTickMap[statType] || 1;
-
-        if (changeButton === 'Count by %') {
-          statRealBoost = statBoost / 20;
-        } else {
-          statRealBoost = statBoost / 100;
-        }
-
-        const tick = Math.floor(statTickSeconds/((fastTrain?1.25:1)+(statRealBoost))*100)/100;
-        const gainPerSecond = perTick / tick;
-
-        if (goalType === 'amountToTime') {
-          const goal = parseNumber(goalValueRaw);
-          const left = goal - currentStat;
-          const seconds = left / gainPerSecond;
-
-          let currentStatEdidable = currentStat;
-          let elapsed = 0;
-
-          const targetDate = new Date(Date.now() + seconds * 1000);
-          const pad = n => n.toString().padStart(2, '0');
-          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
-          resultTitle = `Goal reached at: ${localDateStr}`;
-          if (dynamicTimestamp) {
-            document.getElementById('result').title = resultTitle;
-          }
-
-          if (dynamicTimestamp) {
-            while (currentStatEdidable < goal) {
-              if (myCalculateId !== currentCalculateId) return;
-              
-              currentStatEdidable += perTick*tick;
-              elapsed += 1;
-
-              const remaining = Math.max(0, goal - currentStatEdidable);
-              const estimatedRemainingTime = remaining / gainPerSecond;
-
-              result = `Got ${formatNumber(currentStatEdidable)} ${statType} in ${formatTime(elapsed)}, Remaining: ${formatTime(estimatedRemainingTime)}`;
-              document.getElementById('result').innerText = result;
-
-              await new Promise(resolve => setTimeout(resolve, 1000));
-            }
-            result = `Goal reached in ${formatTime(elapsed)}!`;
-          } else {
-            result = `Time to Goal: ${formatTime(seconds)}`;
-          }
-        } else {
-          const seconds = parseTime(goalValueRaw);
-          const gained = gainPerSecond * seconds;
-          result = `You will gain ${formatNumber(gained)} ${statType} in ${formatTime(seconds)}`;
-
-          const targetDate = new Date(Date.now() + seconds * 1000);
-          const pad = n => n.toString().padStart(2, '0');
-          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
-          resultTitle = `You will gain ${formatNumber(gained)} ${statType} at ${localDateStr}`;
-        }
-
-      } else {
-        const interval = parseFloat(document.getElementById('tokenInterval').value || 0);
-        const tokensPer = parseNumber(document.getElementById('tokensPerInterval').value);
-        const goalType = document.getElementById('tokenGoalType').value;
-        const valueRaw = document.getElementById('tokenGoalValue').value;
-        const currentToken = parseNumber(document.getElementById('currentToken').value);
-
-        if (goalType === 'amountToTime') {
-          const goal = parseNumber(valueRaw);
-          const left = goal - currentToken;
-          const totalSeconds = (left / tokensPer) * interval;
-
-          let currentTokenEdidable = currentToken;
-          let elapsed = 0;
-
-          const targetDate = new Date(Date.now() + totalSeconds * 1000);
-          const pad = n => n.toString().padStart(2, '0');
-          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
-          resultTitle = `Goal reached at: ${localDateStr}`;
-          
-          if (dynamicTimestamp) {
-            document.getElementById('result').title = resultTitle;
-          }
-
-          if (dynamicTimestamp) {
-            while (currentTokenEdidable < goal) {
-              if (myCalculateId !== currentCalculateId) return;
-
-              currentTokenEdidable += tokensPer/interval;
-              elapsed += 1;
-
-              const remaining = Math.max(0, goal - currentTokenEdidable);
-              const estimatedRemainingTime = remaining / (tokensPer / interval);
-
-              result = `Got ${formatNumber(currentTokenEdidable)} Tokens in ${formatTime(elapsed)}, Remaining: ${formatTime(estimatedRemainingTime)}`;
-              document.getElementById('result').innerText = result;
-
-              await new Promise(resolve => setTimeout(resolve, 1000));
-            }
-            result = `Goal reached in ${formatTime(elapsed)}!`;
-          } else {
-            result = `Time to Goal: ${formatTime(totalSeconds)}`;
-          }
-        } else {
-          const seconds = parseTime(valueRaw);
-          const totalTokens = (seconds / interval) * tokensPer;
-          result = `You will gain ${formatNumber(totalTokens)} tokens in ${formatTime(seconds)}`;
-
-          const targetDate = new Date(Date.now() + seconds * 1000);
-          const pad = n => n.toString().padStart(2, '0');
-          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
-          resultTitle = `You will gain ${formatNumber(totalTokens)} tokens at ${localDateStr}`;
-        }
-      }
-
-      document.getElementById('result').innerText = result;
-      document.getElementById('result').title = resultTitle;
-      saveForm();
-    }
-
-    window.onload = () => {
-      loadForm();
-      updateCustomCheckboxes();
-      updateCustomSelects();
-
-      document.querySelectorAll('input, select').forEach(input => {
-        input.addEventListener('change', () => {
-          saveForm();
-          if (input.type === 'checkbox') updateCustomCheckboxes();
-        });
-      });
-
-      document.querySelectorAll('.custom-select').forEach(select => {
-        const selected = select.querySelector('.selected');
-        const options = select.querySelector('.options');
-        const hiddenInput = select.nextElementSibling;
-
-        const savedValue = hiddenInput.value;
-        const match = options.querySelector(`div[data-value="${savedValue}"]`);
-        if (match) {
-          selected.textContent = match.textContent;
-        }
-
-        selected.addEventListener('click', () => {
-          document.querySelectorAll('.options').forEach(opt => {
-            if (opt !== options) opt.style.display = 'none';
-          });
-          options.style.display = options.style.display === 'block' ? 'none' : 'block';
-        });
-
-        options.querySelectorAll('div').forEach(option => {
-          option.addEventListener('click', () => {
-            selected.textContent = option.textContent;
-            hiddenInput.value = option.getAttribute('data-value');
-            options.style.display = 'none';
-            saveForm();
-          });
-        });
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.custom-select')) {
-          document.querySelectorAll('.options').forEach(opt => opt.style.display = 'none');
-        }
-      });
-    };
-  </script>
-</body>
+  </body>
 </html>
