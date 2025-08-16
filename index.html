@@ -1,105 +1,245 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Basic -->
-    <title>Calculators Hub — Quick Game Progress Tools</title>
-    <meta name="description" content="A compact hub with fast links to your game calculators — stats, tokens, training planner and more. Black + red theme, ready for use on desktop and mobile.">
-    <meta name="keywords" content="calculator, game calculator, stats calculator, tokens calculator, planner, online tools, progress tracker">
-    <meta name="author" content="arturwol">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0b0b0b">
-    <link rel="canonical" href="https://your-site.example/">
-    <link rel="icon" href="https://i.ibb.co/KS0m9JY/image.png" type="image/x-icon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Apple -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Calculators Hub">
+  <!-- Basic -->
+  <title>RBX Calculators — Quick Game Progress Tools</title>
+  <meta name="description"
+    content="A compact hub with fast links to calculators in Roblox — stats, tokens, training planner and more.">
+  <meta name="keywords"
+    content="calculator, game calculator, stats calculator, tokens calculator, planner, online tools, progress tracker">
+  <meta name="author" content="arturwol">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b0b0b">
+  <link rel="canonical" href="https://rbxc.netlify.app">
+  <link rel="icon" href="https://i.ibb.co/r2xfy5Vz/2025-08-16-151027523-1.png" type="image/x-icon">
 
-    <!-- Microsoft -->
-    <meta name="msapplication-TileColor" content="#0b0b0b">
-    <meta name="msapplication-TileImage" content="https://i.ibb.co/KS0m9JY/image.png">
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RBX Calculators">
 
-    <!-- Open Graph / Facebook / Discord / LinkedIn -->
-    <meta property="og:title" content="Calculators Hub — Quick Game Progress Tools">
-    <meta property="og:description" content="Open fast links to your calculators: stats, tokens, training planner and more. Save time and plan progress with ease.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-site.example/">
-    <meta property="og:image" content="https://i.ibb.co/svG0dydt/image.png">
-    <meta property="og:image:alt" content="Calculators Hub preview image">
-    <meta property="og:site_name" content="Calculators Hub">
-    <meta property="og:locale" content="en_US">
+  <!-- Microsoft -->
+  <meta name="msapplication-TileColor" content="#0b0b0b">
+  <meta name="msapplication-TileImage" content="https://i.ibb.co/r2xfy5Vz/2025-08-16-151027523-1.png">
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Calculators Hub — Quick Game Progress Tools">
-    <meta name="twitter:description" content="Open fast links to your calculators: stats, tokens, planner and more. Black + red theme.">
-    <meta name="twitter:image" content="https://i.ibb.co/svG0dydt/image.png">
-    <meta name="twitter:image:alt" content="Calculators Hub preview image">
-    <meta name="twitter:site" content="@artnrwol">
+  <!-- Open Graph / Facebook / Discord / LinkedIn -->
+  <meta property="og:title" content="RBX Calculators — Quick Game Progress Tools">
+  <meta property="og:description"
+    content="Open fast links to your calculators: stats, tokens, training planner and more. Save time and plan progress with ease.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rbxc.netlify.app">
+  <meta property="og:image" content="https://i.ibb.co/FvSsvP8/image.png">
+  <meta property="og:image:alt" content="RBX Calculators preview image">
+  <meta property="og:site_name" content="RBX Calculators">
+  <meta property="og:locale" content="en_US">
 
-    <style>
-      :root{--bg:#0b0b0b;--card:#0f0f10;--accent:#d32f2f;--accent-2:#b71c1c;--muted:#d9d9d9;--glass:rgba(255,255,255,0.03);--radius:12px}
-      html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:linear-gradient(180deg,#070707 0%,#0d0d0d 100%);color:var(--muted)}
-      .wrap{max-width:1100px;margin:36px auto;padding:20px;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(8,0,0,0.4));border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(211,47,47,0.06)}
-      header{display:flex;align-items:center;gap:16px}
-      .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#111;font-weight:800}
-      h1{margin:0;font-size:1.4rem;color:#fff}
-      p.lead{margin:4px 0 0;color:#e6e6e6;opacity:0.95}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RBX Calculators — Quick Game Progress Tools">
+  <meta name="twitter:description"
+    content="Open fast links to your calculators: stats, tokens, planner and more. Black + red theme.">
+  <meta name="twitter:image" content="https://i.ibb.co/FvSsvP8/image.png">
+  <meta name="twitter:image:alt" content="RBX Calculators preview image">
+  <meta name="twitter:site" content="@artnrwol">
 
-      .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
-      .card{background:linear-gradient(180deg,var(--glass),transparent);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:8px;min-height:110px;transition:transform .16s ease,box-shadow .16s ease}
-      .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6),0 8px 24px rgba(211,47,47,0.06)}
-      .card a{color:inherit;text-decoration:none}
-      .card .title{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff}
-      .card .desc{font-size:0.92rem;color:#e6e6e6;opacity:0.9}
-      .tag{margin-left:auto;font-size:0.75rem;padding:6px 8px;border-radius:8px;background:rgba(211,47,47,0.12);color:var(--accent);font-weight:700}
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --card: #0f0f10;
+      --accent: #d32f2f;
+      --accent-2: #b71c1c;
+      --muted: #d9d9d9;
+      --glass: rgba(255, 255, 255, 0.03);
+      --radius: 12px
+    }
 
-      footer{margin-top:22px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center;color:#bdbdbd}
-      .small{font-size:0.9rem;color:#cfcfcf}
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: linear-gradient(180deg, #070707 0%, #0d0d0d 100%);
+      color: var(--muted)
+    }
 
-      @media (max-width:780px){.wrap{margin:16px}h1{font-size:1.2rem}}
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <div class="logo">CH</div>
-        <div>
-          <h1>Calculators Hub</h1>
-          <p class="lead">Fast links to your calculators — stats, tokens, training planner and more. Black + red theme, mobile-friendly.</p>
+    .wrap {
+      max-width: 1100px;
+      margin: 36px auto;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(8, 0, 0, 0.4));
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(211, 47, 47, 0.06)
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111;
+      font-weight: 800
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      color: #fff
+    }
+
+    p.lead {
+      margin: 4px 0 0;
+      color: #e6e6e6;
+      opacity: 0.95
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--glass), transparent);
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 110px;
+      transition: transform .16s ease, box-shadow .16s ease
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(211, 47, 47, 0.06)
+    }
+
+    .card a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .card .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: #fff
+    }
+
+    .card .desc {
+      font-size: 0.92rem;
+      color: #e6e6e6;
+      opacity: 0.9
+    }
+
+    .tag {
+      margin-left: auto;
+      font-size: 0.75rem;
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: rgba(211, 47, 47, 0.12);
+      color: var(--accent);
+      font-weight: 700
+    }
+
+    /* --- SPTS --- */
+    .tag.spts {
+      background: linear-gradient(135deg, #121212, #221d18);
+      color: #ffd23f;
+      text-shadow: 0 0 6px rgba(255, 160, 60, 0.14);
+    }
+
+    /* --- SPTL --- */
+    .tag.sptl {
+      background: rgb(2, 0, 14);
+      color: rgb(55, 11, 175);
+    }
+
+    footer {
+      margin-top: 22px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #bdbdbd
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: #cfcfcf
+    }
+
+    @media (max-width:780px) {
+      .wrap {
+        margin: 16px
+      }
+
+      h1 {
+        font-size: 1.2rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">RBXC</div>
+      <div>
+        <h1>RBX Calculators</h1>
+        <p class="lead">Fast links to your calculators — stats, tokens, training planner and more. Black + red theme,
+          mobile-friendly.</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid" aria-label="Calculator links">
+        <div class="card">
+          <a href="/SPTSC">
+            <div class="title">💥Super Power Training Simulator Classic<span class="tag spts">SPTS</span></div>
+            <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time
+              and time-to-goal.</div>
+          </a>
         </div>
-      </header>
 
-      <main>
-        <div class="grid" aria-label="Calculator links">
-          <div class="card">
-            <a href="/SPTSC">
-              <div class="title">💥Super Power Training Simulator Classic<span class="tag">SPTS</span></div>
-              <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time and time-to-goal.</div>
-            </a>
-          </div>
-
-          <div class="card">
-            <a href="/SPTLC">
-              <div class="title">Super Power Training League<span class="tag">SPTL</span></div>
-              <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time and time-to-goal.</div>
-            </a>
-          </div>
+        <div class="card">
+          <a href="/SPTLC">
+            <div class="title">Super Power Training League<span class="tag sptl">SPTL</span></div>
+            <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time
+              and time-to-goal.</div>
+          </a>
+        </div>
 
         <section style="margin-top:18px">
           <details>
             <summary style="cursor:pointer;color:#fff;font-weight:700">About this hub</summary>
-            <p style="margin-top:8px;color:#e6e6e6;line-height:1.45">This hub provides quick access to your calculators. Links open in a new tab. Replace the <code>href</code> values in the HTML with your real calculator URLs. If you want, I can automatically insert your URLs and add thumbnail previews for each card.</p>
+            <p style="margin-top:8px;color:#e6e6e6;line-height:1.45">A compact hub with fast links to calculators in
+              Roblox — stats, tokens, training planner and more.</p>
           </details>
         </section>
-      </main>
-      <footer>
-        <div class="small"><strong style="color:var(--accent)">© Calculators Hub — created by @arturwol</strong></div>
-      </footer>
-    </div>
-  </body>
+    </main>
+    <footer>
+      <div class="small"><strong style="color:var(--accent)">© RBX Calculators — created by @arturwol</strong></div>
+    </footer>
+  </div>
+</body>
+
 </html>
