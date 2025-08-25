@@ -62,7 +62,7 @@
     <div id="stats-tab">
       <div class="form-group">
         <label>Select your current Stat</label>
-        <div class="custom-select" id="customStatSelect">
+        <div class="custom-select" id="SPTLStatSelect">
           <div class="selected">Power</div>
           <div class="options">
             <div data-value="Power">Power</div>
@@ -73,42 +73,42 @@
             <div data-value="Mobility">Mobility</div>
           </div>
         </div>
-        <input type="hidden" id="statType" value="Power">
+        <input type="hidden" id="SPTLStatType" value="Power">
       </div>
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('fastTrain')">
-          <div class="checkbox-box" id="fastTrain-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTLFastTrain')">
+          <div class="checkbox-box" id="SPTLFastTrain-box"></div>
           <span>"Faster Train" Gamepass</span>
         </div>
-        <input type="checkbox" id="fastTrain" style="display: none;">
+        <input type="checkbox" id="SPTLFastTrain" style="display: none;">
       </div>
       <div class="form-group">
         <label id="Faster">Faster Stat (Levels)</label>
-        <input type="number" id="statUpgrade" min="0" max="5"
+        <input type="number" id="SPTLStatUpgrade" min="0" max="5"
           placeholder="Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3">
-        <button data-key="Count by %" id="Change" onclick="change()"
+        <button data-key="Count by %" id="SPTLChange" onclick="change()"
           style="width: fit-content;margin-top: -90%;height: 1%;padding-left: 5px;padding-right: 5px;display: inline-block;padding-top: 5px;padding-bottom: 5px;font-size: 16px;">Count
           by %</button>
       </div>
       <div class="form-group">
         <label>Stat per Tick</label>
-        <input type="text" id="perTick" placeholder="Write how much you getting this stat, like 2.08k">
+        <input type="text" id="SPTLStatPerTick" placeholder="Write how much you getting this stat, like 2.08k">
       </div>
       <div class="form-group">
         <label>Current Stat</label>
-        <input type="text" id="currentStat" placeholder="Write amount of current stat, like 58.5m">
+        <input type="text" id="SPTLCurrentStat" placeholder="Write amount of current stat, like 58.5m">
       </div>
       <div class="form-group">
-        <div class="custom-select" id="customStatSelect">
+        <div class="custom-select" id="SPTLStatSelect">
           <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           <div class="options">
             <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
             <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           </div>
         </div>
-        <input type="hidden" id="goalType" value="amountToTime">
+        <input type="hidden" id="SPTLGoalType" value="amountToTime">
         <div class="form-group" style="margin-top: 5px;">
-          <input type="text" id="goalValue" placeholder="Write your goal value here">
+          <input type="text" id="SPTLGoalValue" placeholder="Write your goal value here">
         </div>
       </div>
     </div>
@@ -116,39 +116,39 @@
     <div id="tokens-tab" style="display: none">
       <div class="form-group">
         <label>Tick per Tokens</label>
-        <input type="number" id="tokenInterval" placeholder="Write how much time you wait to get tokens, like 30"
+        <input type="number" id="SPTLTokenInterval" placeholder="Write how much time you wait to get tokens, like 30"
           min="35" max="60">
       </div>
       <div class="form-group">
         <label>Tokens per Tick</label>
-        <input type="text" id="tokensPerInterval" placeholder="Write how much you getting tokens">
+        <input type="text" id="SPTLTokensPerInterval" placeholder="Write how much you getting tokens">
       </div>
       <div class="form-group">
         <label>Current Tokens</label>
-        <input type="text" id="currentToken" placeholder="Write amount of current tokens, like 58.5m">
+        <input type="text" id="SPTLCurrentTokens" placeholder="Write amount of current tokens, like 58.5m">
       </div>
       <div class="form-group">
-        <div class="custom-select" id="customTokenSelect">
+        <div class="custom-select" id="SPTLTokenSelect">
           <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           <div class="options">
             <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
             <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           </div>
         </div>
-        <input type="hidden" id="tokenGoalType" value="amountToTime">
+        <input type="hidden" id="SPTLTokenGoalType" value="amountToTime">
         <div class="form-group" style="margin-top: 5px;">
-          <input type="text" id="tokenGoalValue" placeholder="Write your goal value here">
+          <input type="text" id="SPTLTokenGoalValue" placeholder="Write your goal value here">
         </div>
       </div>
     </div>
 
     <div id="settings-tab" style="display: none">
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('dynamicTimestamp')">
-          <div class="checkbox-box" id="dynamicTimestamp-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTLDynamicTimestamp')">
+          <div class="checkbox-box" id="SPTLDynamicTimestamp-box"></div>
           <span>Dynamic Timestamp</span>
         </div>
-        <input type="checkbox" id="dynamicTimestamp" style="display: none;">
+        <input type="checkbox" id="SPTLDynamicTimestamp" style="display: none;">
       </div>
     </div>
 
@@ -197,40 +197,40 @@
     }
 
     function change() {
-      const changeButton = document.getElementById('Change');
+      const changeButton = document.getElementById('SPTLChange');
 
       if (changeButton.dataset.key === 'Count by %') {
         changeButton.textContent = 'Count by Levels';
         changeButton.dataset.key = 'Count by Levels';
-        document.getElementById('statUpgrade').max = 25;
+        document.getElementById('SPTLStatUpgrade').max = 25;
         document.getElementById('Faster').textContent = 'Faster Stat (%)';
-        document.getElementById('statUpgrade').placeholder = 'Write your Upgrade Percent in Level Skill Tree > Faster Stat, like 15';
+        document.getElementById('SPTLStatUpgrade').placeholder = 'Write your Upgrade Percent in Level Skill Tree > Faster Stat, like 15';
       } else {
         changeButton.dataset.key = 'Count by %';
         changeButton.textContent = 'Count by %';
-        document.getElementById('statUpgrade').max = 5;
+        document.getElementById('SPTLStatUpgrade').max = 5;
         document.getElementById('Faster').textContent = 'Faster Stat (Levels)';
-        document.getElementById('statUpgrade').placeholder = 'Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3';
+        document.getElementById('SPTLStatUpgrade').placeholder = 'Write your Upgrade Count in Level Skill Tree > Faster Stat, like 3';
       }
     }
 
     async function calculate() {
-      const dynamicTimestamp = document.getElementById('dynamicTimestamp').checked;
+      const dynamicTimestamp = document.getElementById('SPTLDynamicTimestamp').checked;
       const myCalculateId = ++currentCalculateId;
 
       const activeTab = document.querySelector('.tab.active').dataset.key;
-      const changeButton = document.getElementById('Change').textContent;
+      const changeButton = document.getElementById('SPTLChange').textContent;
       let result = '';
       let resultTitle = '';
 
       if (activeTab === 'Stats') {
-        const statType = document.getElementById('statType').value;
-        const fastTrain = document.getElementById('fastTrain').checked;
-        const statBoost = parseFloat(document.getElementById('statUpgrade').value || 0);
-        const perTick = parseNumber(document.getElementById('perTick').value);
-        const currentStat = parseNumber(document.getElementById('currentStat').value);
-        const goalType = document.getElementById('goalType').value;
-        const goalValueRaw = document.getElementById('goalValue').value;
+        const statType = document.getElementById('SPTLStatType').value;
+        const fastTrain = document.getElementById('SPTLFastTrain').checked;
+        const statBoost = parseFloat(document.getElementById('SPTLStatUpgrade').value || 0);
+        const perTick = parseNumber(document.getElementById('SPTLStatPerTick').value);
+        const currentStat = parseNumber(document.getElementById('SPTLCurrentStat').value);
+        const goalType = document.getElementById('SPTLGoalType').value;
+        const goalValueRaw = document.getElementById('SPTLGoalValue').value;
         const goal = parseNumber(goalValueRaw);
 
         const statTickMap = {
@@ -243,6 +243,7 @@
         };
         const statTickSeconds = statTickMap[statType] || 1;
 
+        let statRealBoost;
         if (changeButton === 'Count by %') {
           statRealBoost = statBoost / 20;
         } else {
@@ -299,11 +300,11 @@
         }
 
       } else {
-        const interval = parseFloat(document.getElementById('tokenInterval').value || 0);
-        const tokensPer = parseNumber(document.getElementById('tokensPerInterval').value);
-        const goalType = document.getElementById('tokenGoalType').value;
-        const valueRaw = document.getElementById('tokenGoalValue').value;
-        const currentToken = parseNumber(document.getElementById('currentToken').value);
+        const interval = parseFloat(document.getElementById('SPTLTokenInterval').value || 0);
+        const tokensPer = parseNumber(document.getElementById('SPTLTokensPerInterval').value);
+        const goalType = document.getElementById('SPTLTokenGoalType').value;
+        const valueRaw = document.getElementById('SPTLTokenGoalValue').value;
+        const currentToken = parseNumber(document.getElementById('SPTLCurrentTokens').value);
 
         if (goalType === 'amountToTime') {
           const goal = parseNumber(valueRaw);

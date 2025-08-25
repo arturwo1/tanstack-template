@@ -57,7 +57,7 @@
     <div id="stats-tab">
       <div class="form-group">
         <label>Select your current Stat</label>
-        <div class="custom-select" id="customStatSelect">
+        <div class="custom-select" id="SPTSStatSelect">
           <div class="selected">Fist Strength</div>
           <div class="options">
             <div data-value="FS">Fist Strength</div>
@@ -67,91 +67,91 @@
             <div data-value="PP">Psychic Power</div>
           </div>
         </div>
-        <input type="hidden" id="statType" value="FS">
+        <input type="hidden" id="SPTSStatType" value="FS">
       </div>
-      <div class="form-group" style="display: none;" id="msTickGroup">
+      <div class="form-group" style="display: none;" id="SPTSMSTickGroup">
         <label>MS Tick</label>
-        <input type="text" id="MSTick"
+        <input type="text" id="SPTSMSTick"
           placeholder="Only for Movement Speed. MS tick are unstable, so you need to choose number. Default 2, in game you can get 3.">
       </div>
       <div class="form-group">
         <label>Stat per Tick</label>
-        <input type="text" id="perTick" placeholder="Write how much you getting this stat, like 2.08k">
+        <input type="text" id="SPTSStatPerTick" placeholder="Write how much you getting this stat, like 2.08k">
       </div>
       <div class="form-group">
         <label>Current Stat</label>
-        <input type="text" id="currentStat" placeholder="Write amount of current stat, like 58.5m">
+        <input type="text" id="SPTSCurrentStat" placeholder="Write amount of current stat, like 58.5m">
       </div>
       <div class="form-group">
-        <div class="custom-select" id="customStatSelect">
+        <div class="custom-select" id="SPTSStatSelect">
           <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           <div class="options">
             <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
             <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           </div>
         </div>
-        <input type="hidden" id="goalType" value="amountToTime">
+        <input type="hidden" id="SPTSGoalType" value="amountToTime">
         <div class="form-group" style="margin-top: 5px;">
-          <input type="text" id="goalValue" placeholder="Write your goal value here">
+          <input type="text" id="SPTSGoalValue" placeholder="Write your goal value here">
         </div>
       </div>
     </div>
 
     <div id="tokens-tab" style="display: none">
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('DailyQuests')">
-          <div class="checkbox-box" id="DailyQuests-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTSDailyQuests')">
+          <div class="checkbox-box" id="SPTSDailyQuests-box"></div>
           <span>Daily quests (+60/day)</span>
         </div>
-        <input type="checkbox" id="DailyQuests" style="display: none;">
+        <input type="checkbox" id="SPTSDailyQuests" style="display: none;">
       </div>
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('WeeklyQuests')">
-          <div class="checkbox-box" id="WeeklyQuests-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTSWeeklyQuests')">
+          <div class="checkbox-box" id="SPTSWeeklyQuests-box"></div>
           <span>Weekly (+9300/week)</span>
         </div>
-        <input type="checkbox" id="WeeklyQuests" style="display: none;">
+        <input type="checkbox" id="SPTSWeeklyQuests" style="display: none;">
       </div>
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('VIP')">
-          <div class="checkbox-box" id="VIP-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTSVIP')">
+          <div class="checkbox-box" id="SPTSVIP-box"></div>
           <span>VIP (x2 daily & weekly)</span>
         </div>
-        <input type="checkbox" id="VIP" style="display: none;">
+        <input type="checkbox" id="SPTSVIP" style="display: none;">
       </div>
       <div class="form-group">
         <label>Current Tokens</label>
-        <input type="text" id="currentToken" placeholder="Write amount of current tokens, like 58.5m">
+        <input type="text" id="SPTSCurrentTokens" placeholder="Write amount of current tokens, like 58.5m">
       </div>
       <div class="form-group">
-        <div class="custom-select" id="customTokenSelect">
+        <div class="custom-select" id="SPTSTokenSelect">
           <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           <div class="options">
             <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
             <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           </div>
         </div>
-        <input type="hidden" id="tokenGoalType" value="amountToTime">
+        <input type="hidden" id="SPTSTokenGoalType" value="amountToTime">
         <div class="form-group" style="margin-top: 5px;">
-          <input type="text" id="tokenGoalValue" placeholder="Write your goal value here">
+          <input type="text" id="SPTSTokenGoalValue" placeholder="Write your goal value here">
         </div>
       </div>
     </div>
 
     <div id="settings-tab" style="display: none">
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('dynamicTimestamp')">
-          <div class="checkbox-box" id="dynamicTimestamp-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTSDynamicTimestamp')">
+          <div class="checkbox-box" id="SPTSDynamicTimestamp-box"></div>
           <span>Dynamic Timestamp</span>
         </div>
-        <input type="checkbox" id="dynamicTimestamp" style="display: none;">
+        <input type="checkbox" id="SPTSDynamicTimestamp" style="display: none;">
       </div>
       <div class="form-group">
-        <div class="custom-checkbox" onclick="toggleCheckbox('lightTheme')">
-          <div class="checkbox-box" id="lightTheme-box"></div>
+        <div class="custom-checkbox" onclick="toggleCheckbox('SPTSLightTheme')">
+          <div class="checkbox-box" id="SPTSLightTheme-box"></div>
           <span>Light Theme</span>
         </div>
-        <input type="checkbox" id="lightTheme" style="display: none;">
+        <input type="checkbox" id="SPTSLightTheme" style="display: none;">
       </div>
     </div>
 
@@ -197,7 +197,7 @@
       checkbox.checked = !checkbox.checked;
       box.classList.toggle('checked', checkbox.checked);
       saveForm();
-      if (id === "lightTheme") {
+      if (id === "SPTSLightTheme") {
         const theme = checkbox.checked ? 'light' : 'dark';
         applyTheme(theme);
         localStorage.setItem('theme', theme);
@@ -217,7 +217,7 @@
     }
 
     async function calculate() {
-      const dynamicTimestamp = document.getElementById('dynamicTimestamp').checked;
+      const dynamicTimestamp = document.getElementById('SPTSDynamicTimestamp').checked;
       const myCalculateId = ++currentCalculateId;
 
       const activeTab = document.querySelector('.tab.active').dataset.key;
@@ -225,12 +225,12 @@
       let resultTitle = '';
 
       if (activeTab === 'Stats') {
-        const statType = document.getElementById('statType').value;
-        const perTick = parseNumber(document.getElementById('perTick').value);
-        const MSTick = parseNumber(document.getElementById('MSTick').value) || 2;
-        const currentStat = parseNumber(document.getElementById('currentStat').value);
-        const goalType = document.getElementById('goalType').value;
-        const goalValueRaw = document.getElementById('goalValue').value;
+        const statType = document.getElementById('SPTSStatType').value;
+        const perTick = parseNumber(document.getElementById('SPTSStatPerTick').value);
+        const MSTick = parseNumber(document.getElementById('SPTSMSTick').value) || 2;
+        const currentStat = parseNumber(document.getElementById('SPTSCurrentStat').value);
+        const goalType = document.getElementById('SPTSGoalType').value;
+        const goalValueRaw = document.getElementById('SPTSGoalValue').value;
         const goal = parseNumber(goalValueRaw);
 
         const statTickMap = {
@@ -292,12 +292,12 @@
         }
 
       } else {
-        const DailyQuests = document.getElementById('DailyQuests').checked;
-        const WeeklyQuests = document.getElementById('WeeklyQuests').checked;
-        const VIP = document.getElementById('VIP').checked;
-        const goalType = document.getElementById('tokenGoalType').value;
-        const valueRaw = document.getElementById('tokenGoalValue').value;
-        const currentToken = parseNumber(document.getElementById('currentToken').value);
+        const DailyQuests = document.getElementById('SPTSDailyQuests').checked;
+        const WeeklyQuests = document.getElementById('SPTSWeeklyQuests').checked;
+        const VIP = document.getElementById('SPTSVIP').checked;
+        const goalType = document.getElementById('SPTSTokenGoalType').value;
+        const valueRaw = document.getElementById('SPTSTokenGoalValue').value;
+        const currentToken = parseNumber(document.getElementById('SPTSCurrentTokens').value);
 
         const tpm = 5; const tps_from_tpm = tpm / 60;
         let daily = DailyQuests ? 60 : 0; let weekly = WeeklyQuests ? 9300 : 0; if (VIP) { daily *= 2; weekly *= 2; }
@@ -368,12 +368,12 @@
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
         applyTheme(savedTheme);
-        document.getElementById('lightTheme').checked = savedTheme === 'light';
-        document.getElementById('lightTheme-box').classList.toggle('checked', savedTheme === 'light');
+        document.getElementById('SPTSLightTheme').checked = savedTheme === 'light';
+        document.getElementById('SPTSLightTheme-box').classList.toggle('checked', savedTheme === 'light');
       }
 
-      const statType = document.getElementById('statType').value;
-      const msTickGroup = document.getElementById('msTickGroup');
+      const statType = document.getElementById('SPTSStatType').value;
+      const msTickGroup = document.getElementById('SPTSMSTickGroup');
       if (statType === 'MS') {
         msTickGroup.style.display = 'block';
       } else {
@@ -412,7 +412,7 @@
             options.style.display = 'none';
             saveForm();
 
-            const msTickGroup = document.getElementById('msTickGroup');
+            const msTickGroup = document.getElementById('SPTSMSTickGroup');
               if (hiddenInput.value === 'MS') {
                 msTickGroup.style.display = 'block';
               } else {
