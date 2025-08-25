@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -46,83 +46,19 @@
   <meta name="twitter:image:alt" content="RBX Calculators preview image">
   <meta name="twitter:site" content="@artnrwol">
 
+  <link rel="stylesheet" href="../assets/style.css">
   <style>
-    :root {
-      --bg: #0b0b0b;
-      --card: #0f0f10;
-      --accent: #d32f2f;
-      --accent-2: #b71c1c;
-      --muted: #d9d9d9;
-      --glass: rgba(255, 255, 255, 0.03);
-      --radius: 12px
-    }
-
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background: linear-gradient(180deg, #070707 0%, #0d0d0d 100%);
-      color: var(--muted)
-    }
-
-    .wrap {
-      max-width: 1100px;
-      margin: 36px auto;
-      padding: 20px;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(8, 0, 0, 0.4));
-      border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(211, 47, 47, 0.06)
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 16px
-    }
-
-    .logo {
-      width: 56px;
-      height: 56px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #111;
-      font-weight: 800
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 1.4rem;
-      color: #fff
-    }
-
-    p.lead {
-      margin: 4px 0 0;
-      color: #e6e6e6;
-      opacity: 0.95
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 18px
-    }
-
     .card {
-      background: linear-gradient(180deg, var(--glass), transparent);
+      background: linear-gradient(180deg, var(--bg-button), transparent);
       border-radius: 12px;
       padding: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--select-options-border);
       display: flex;
       flex-direction: column;
       gap: 8px;
       min-height: 110px;
-      transition: transform .16s ease, box-shadow .16s ease
+      transition: transform .16s ease, box-shadow .16s ease;
+      margin-bottom: 15px;
     }
 
     .card:hover {
@@ -140,12 +76,12 @@
       align-items: center;
       gap: 10px;
       font-weight: 800;
-      color: #fff
+      color: var(--select-selected-color)
     }
 
     .card .desc {
       font-size: 0.92rem;
-      color: #e6e6e6;
+      color: var(--select-options-div-color);
       opacity: 0.9
     }
 
@@ -154,9 +90,9 @@
       font-size: 0.75rem;
       padding: 6px 8px;
       border-radius: 8px;
-      background: rgba(211, 47, 47, 0.12);
+      background: var(--bg-select-selected);
       color: var(--accent);
-      font-weight: 700
+      font-weight: 700;
     }
 
     /* --- SPTS --- */
@@ -171,74 +107,94 @@
       background: rgb(2, 0, 14);
       color: rgb(55, 11, 175);
     }
-
-    footer {
-      margin-top: 22px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.02);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #bdbdbd
-    }
-
-    .small {
-      font-size: 0.9rem;
-      color: #cfcfcf
-    }
-
-    @media (max-width:780px) {
-      .wrap {
-        margin: 16px
-      }
-
-      h1 {
-        font-size: 1.2rem
-      }
-    }
   </style>
 </head>
 
-<body>
-  <div class="wrap">
-    <header>
-      <div class="logo">RBXC</div>
-      <div>
-        <h1>RBX Calculators</h1>
-        <p class="lead">Fast links to your calculators — stats, tokens, training planner and more.</p>
+<body data-palette="hub">
+  <div class="container">
+    <div class="tabs">
+      <div data-key="calculators" class="tab active" onclick="switchTab('calculators')">Calculators</div>
+      <div class="tab" onclick="switchTab('about')">About</div>
+    </div>
+
+    <h1 style="text-align: center">All Calculators</h1>
+
+    <div id="calculators-tab">
+      <div class="card">
+        <a href="/SPTSC">
+          <div class="title">💥Super Power Training Simulator Classic<span class="tag spts">SPTS</span></div>
+          <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time
+            and time-to-goal.</div>
+        </a>
       </div>
-    </header>
 
-    <main>
-      <div class="grid" aria-label="Calculator links">
-        <div class="card">
-          <a href="/SPTSC">
-            <div class="title">💥Super Power Training Simulator Classic<span class="tag spts">SPTS</span></div>
-            <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time
-              and time-to-goal.</div>
-          </a>
-        </div>
+      <div class="card">
+        <a href="/SPTLC">
+          <div class="title">Super Power Training League<span class="tag sptl">SPTL</span></div>
+          <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time
+            and time-to-goal.</div>
+        </a>
+      </div>
+    </div>
 
-        <div class="card">
-          <a href="/SPTLC">
-            <div class="title">Super Power Training League<span class="tag sptl">SPTL</span></div>
-            <div class="desc">Estimate stat growth, time to goal and account for boosts. Calculate token gain over time
-              and time-to-goal.</div>
-          </a>
-        </div>
+    <div id="about-tab" style="display: none">
+      <div class="form-group">
+        <label>A compact hub with fast links to calculators in Roblox — stats, tokens, training planner and more.</label>
+      </div>
+    </div>
 
-        <section style="margin-top:18px">
-          <details>
-            <summary style="cursor:pointer;color:#fff;font-weight:700">About this hub</summary>
-            <p style="margin-top:8px;color:#e6e6e6;line-height:1.45">A compact hub with fast links to calculators in
-              Roblox — stats, tokens, training planner and more.</p>
-          </details>
-        </section>
-    </main>
-    <footer>
-      <div class="small"><strong style="color:var(--accent)">© RBX Calculators — created by @arturwol</strong></div>
-    </footer>
+    <label>made by @arturwol</label>
   </div>
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('calculators-tab').style.display = 'none';
+      document.getElementById('about-tab').style.display = 'none';
+      if (tab === 'calculators') {
+        document.getElementById('calculators-tab').style.display = 'block';
+        document.querySelectorAll('.tab')[0].classList.add('active');
+        document.querySelector('h1').textContent = 'All Calculators';
+        document.querySelector('.tab.active').dataset.key = 'Calculators';
+      } else if (tab === 'about') {
+        document.getElementById('about-tab').style.display = 'block';
+        document.querySelectorAll('.tab')[1].classList.add('active');
+        document.querySelector('h1').textContent = 'About';
+        document.querySelector('.tab.active').dataset.key = 'About';
+      } else {
+        document.getElementById('settings-tab').style.display = 'block';
+        document.querySelectorAll('.tab')[2].classList.add('active');
+        document.querySelector('h1').textContent = 'Settings';
+        document.getElementById('Calculate').style.display = 'none';
+        document.getElementById('result').style.display = 'none';
+        document.querySelector('.tab.active').dataset.key = 'Settings';
+      }
+    }
+
+    function hasBgImage(bgUrlRaw) {
+      if (!bgUrlRaw) return false;
+      const bgUrl = String(bgUrlRaw).trim();
+      if (!bgUrl || bgUrl.toLowerCase() === 'none') return false;
+
+      const m = bgUrl.match(/^url\((['"]?)(.*)\1\)$/i);
+      if (!m) return false;
+      return m[2].trim().length > 0;
+    }
+
+    const body = document.body;
+    const raw = getComputedStyle(body).getPropertyValue('--bg-url');
+    if (hasBgImage(raw)) {
+      body.classList.remove('no-bg');
+    } else {
+      body.classList.add('no-bg');
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(() => console.log('SW registered'))
+        .catch(e => console.warn('SW reg fail', e));
+    }
+  </script>
 </body>
 
 </html>

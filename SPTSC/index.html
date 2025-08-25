@@ -1,6 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>SPTS — Stats & Tokens Calculator</title>
@@ -29,7 +30,7 @@
       content="Calculate stat training time and token gain quickly — enter your current values, goals and get an ETA." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rbxc.netlify.app/sptsc" />
-    <meta property="og:image" content="https://i.ibb.co/HmthgGy/image.png" />
+    <meta property="og:image" content="https://i.ibb.co/V0JBsHdP/image.png" />
     <meta property="og:image:alt" content="SPTS Calculator preview" />
     <meta property="og:site_name" content="SPTS Stats & Tokens Calculator" />
     <meta property="og:locale" content="en_US" />
@@ -39,842 +40,395 @@
     <meta name="twitter:title" content="SPTS Stats & Tokens Calculator" />
     <meta name="twitter:description"
       content="Calculate stat training time and token gain quickly — enter your current values, goals and get an ETA." />
-    <meta name="twitter:image" content="https://i.ibb.co/HmthgGy/image.png" />
+    <meta name="twitter:image" content="https://i.ibb.co/V0JBsHdP/image.png" />
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
 
-    <style>
-      :root {
-        /* light theme (defaults overridden by .dark) */
-        --bg: #fffbf6;
-        --bg-gradient-start: #ffffff;
-        --bg-gradient-end: #fff7f0;
-        --card-bg: rgba(255, 255, 255, 0.92);
-        --input-bg: #ffffff;
-        --options-bg: rgb(255 255 255 / 80%);
-        --accent: #fff700;
-        /* button bg */
-        --accent-dark: #ff9500;
-        /* button border & text */
-        --accent-start: #fff700;
-        --accent-end: #fff900;
-        --accent-soft: rgba(255, 215, 0, 0.08);
-        --accent-soft-2: rgba(255, 120, 0, 0.04);
-        --accent-shadow: rgba(255, 149, 0, 0.12);
-        --glow-txt: #ffe417;
-        /* user highlight color (used sparingly) */
-        --glow-border: #ff3ddd;
-        /* user highlight border/glow */
-        --main-text: #2c2c2c;
-        --muted-text: #6b6b6b;
-        --fs-color: #ff0000;
-        --bt-color: #e65639;
-        --jf-color: #d0d409;
-        --ms-color: #3ce000;
-        --pp-color: #57a4ff;
-        --shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
-        --radius: 14px;
-        --glass: rgba(255, 255, 255, 0.92);
-      }
+<body data-palette="spts_dark">
+  <div class="container">
+    <div class="tabs">
+      <div data-key="Stats" class="tab active" onclick="switchTab('stats')">Stats</div>
+      <div class="tab" onclick="switchTab('tokens')">Tokens</div>
+      <div class="tab" onclick="switchTab('settings')">Settings</div>
+    </div>
 
-      /* Dark theme overrides */
-      body.dark {
-        --bg: #0f1115;
-        --bg-gradient-start: #121212;
-        --bg-gradient-end: #221d18;
-        --card-bg: rgba(18, 18, 20, 0.56);
-        --input-bg: rgba(255, 255, 255, 0.03);
-        --options-bg: rgb(26 26 26 / 80%);
-        --accent: #302700;
-        --accent-dark: #864f03;
-        --accent-start: #302700;
-        --accent-end: #302700;
-        --accent-soft: rgba(255, 210, 80, 0.08);
-        --accent-soft-2: rgba(255, 140, 60, 0.04);
-        --accent-shadow: rgba(0, 0, 0, 0.6);
-        --glow-txt: #ffd23f;
-        --glow-border: rgba(255, 160, 60, 0.14);
-        --main-text: #e6e6e6;
-        --muted-text: #9aa0a6;
-        --shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
-        --glass: rgba(255, 255, 255, 0.03);
-      }
+    <h1 style="text-align: center">Stats Calculator</h1>
 
-      * {
-        box-sizing: border-box
-      }
-
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        background: var(--bg);
-        font-family: Inter, "Segoe UI", Roboto, Arial;
-        color: var(--main-text);
-        -webkit-font-smoothing: antialiased
-      }
-
-      /* stretch to full viewport */
-      .container {
-        width: 100vw;
-        height: 100vh;
-        margin: 0;
-        padding: 28px 36px;
-        background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
-        border-radius: 0;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        overflow: auto;
-      }
-
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px
-      }
-
-      header .title {
-        display: flex;
-        flex-direction: column
-      }
-
-      header h1 {
-        margin: 0;
-        font-size: 28px;
-        color: var(--main-text);
-        letter-spacing: 0.2px
-      }
-
-      header p {
-        margin: 6px 0 0;
-        color: var(--muted-text);
-        font-size: 14px
-      }
-
-      /* Theme toggle button */
-      .theme-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 12px;
-        background: transparent;
-        border: 2px solid rgba(255, 255, 255, 0.06);
-        color: var(--main-text);
-        cursor: pointer;
-        font-weight: 900;
-        font-size: 14px;
-        backdrop-filter: blur(6px);
-      }
-
-      .theme-btn .dot {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        display: inline-block;
-        background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
-        border: 2px solid var(--accent-dark);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-      }
-
-      body.dark .theme-btn {
-        border: 2px solid rgba(255, 255, 255, 0.04);
-        background: transparent
-      }
-
-      /* Tabs */
-      .tabs {
-        display: flex;
-        gap: 12px;
-        margin: 12px 0
-      }
-
-      .tab {
-        padding: 12px 22px;
-        border-radius: 999px;
-        background: transparent;
-        border: 2px solid transparent;
-        cursor: pointer;
-        font-weight: 800;
-        color: var(--main-text);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 16px
-      }
-
-      .tab.active {
-        background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
-        border: 2px solid var(--accent-dark);
-        box-shadow: 0 10px 26px rgba(255, 149, 0, 0.12)
-      }
-
-      /* Content */
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 18px;
-        flex: 1
-      }
-
-      .card {
-        background: var(--card-bg);
-        padding: 22px;
-        border-radius: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        box-shadow: var(--shadow)
-      }
-
-      .row {
-        display: flex;
-        gap: 18px;
-        align-items: center
-      }
-
-      .col {
-        flex: 1
-      }
-
-      label.field {
-        display: block;
-        font-size: 15px;
-        margin-bottom: 10px;
-        color: var(--main-text);
-        font-weight: 900
-      }
-
-      /* inputs made larger and readable by default */
-      .input,
-      .select,
-      .checkbox-inline {
-        background: var(--input-bg);
-        border-radius: 12px;
-        padding: 14px 16px;
-        border: 2px solid rgba(0, 0, 0, 0.06);
-        min-height: 60px;
-        display: flex;
-        align-items: center;
-        gap: 12px
-      }
-
-      /* user-entered text: make readable (dark) but keep the highlight glow when focused */
-      .input input {
-        border: none;
-        outline: none;
-        width: 100%;
-        font-weight: 900;
-        font-size: 18px;
-        background: transparent;
-        color: var(--main-text);
-      }
-
-      .input input::placeholder {
-        color: var(--muted-text);
-        font-weight: 700
-      }
-
-      .input input:focus {
-        box-shadow: 0 0 12px rgba(255, 57, 221, 0.06);
-      }
-
-      /* keep highlight color for labels/selected items but not as the main input text color */
-      .select .label {
-        flex: 1;
-        font-weight: 900;
-        color: var(--main-text)
-      }
-
-      .select .selected-highlight {
-        color: var(--glow-txt);
-        text-shadow: 0 0 6px var(--glow-border);
-        font-weight: 900
-      }
-
-      .select .caret {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid var(--accent-dark);
-        color: var(--accent-dark);
-        font-weight: 900
-      }
-
-      .select {
-        position: relative;
-      }
-
-      .select .input {
-        cursor: pointer;
-        transition: box-shadow .15s ease;
-      }
-
-      .select .input:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-      }
-
-      .options {
-        position: absolute;
-        left: 0;
-        top: calc(100% + 8px);
-        width: 100%;
-        background: var(--options-bg);
-        border-radius: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-        max-height: 280px;
-        overflow: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: thin;
-        scrollbar-color: transparent transparent;
-        z-index: 40;
-        padding: 10px;
-      }
-
-      .options div {
-        padding: 12px;
-        border-radius: 10px;
-        font-weight: 900;
-        cursor: pointer
-      }
-
-      .options div:hover {
-        background: linear-gradient(90deg, var(--accent-soft), var(--accent-soft-2))
-      }
-
-      /* checkbox inline */
-      .checkbox-inline {
-        gap: 10px;
-        cursor: pointer
-      }
-
-      .checkbox-box {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        border: 2px solid var(--accent-dark);
-        display: flex;
-        align-items: center;
-        justify-content: center
-      }
-
-      .checkbox-box.checked {
-        background: linear-gradient(90deg, var(--accent-start), var(--accent-end))
-      }
-
-      /* Buttons */
-      .controls {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        margin-top: 12px
-      }
-
-      .btn {
-        padding: 14px 22px;
-        border-radius: 12px;
-        background: var(--accent);
-        border: 2px solid var(--accent-dark);
-        color: var(--accent-dark);
-        font-weight: 900;
-        cursor: pointer;
-        box-shadow: 0 12px 28px rgba(255, 149, 0, 0.12);
-        font-size: 16px
-      }
-
-      .btn.ghost {
-        background: transparent;
-        border: 2px dashed rgba(0, 0, 0, 0.06);
-        color: var(--main-text);
-        font-weight: 800
-      }
-
-      .small {
-        padding: 8px 12px;
-        font-size: 14px
-      }
-
-      .result {
-        padding: 16px;
-        border-radius: 12px;
-        background: var(--input-bg);
-        margin-top: 10px;
-        border-left: 6px solid var(--accent-dark);
-        font-weight: 900;
-        font-size: 16px
-      }
-
-      /* stat tags */
-      .stat-tag {
-        font-weight: 900;
-        padding: 8px 12px;
-        border-radius: 12px;
-        color: #fff;
-        font-size: 15px
-      }
-
-      .stat-fs {
-        background: var(--fs-color)
-      }
-
-      .stat-bt {
-        background: var(--bt-color)
-      }
-
-      .stat-jf {
-        background: var(--jf-color)
-      }
-
-      .stat-ms {
-        background: var(--ms-color);
-        color: #153600
-      }
-
-      .stat-pp {
-        background: var(--pp-color)
-      }
-
-      .note {
-        font-size: 14px;
-        color: var(--muted-text)
-      }
-
-      @media (max-width:1000px) {
-        .row {
-          flex-direction: column
-        }
-
-        .tabs {
-          flex-wrap: wrap
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <header>
-        <div class="title">
-          <h1>SPTS — Stats & Tokens Calculator</h1>
-          <p class="note">Enter your values and press <strong>Calculate</strong>. Supports numeric suffixes
-            (K/M/B/T/Qa/Qd/Qi/Qn/Sx/Sp) and time (d h m s).</p>
+    <div id="stats-tab">
+      <div class="form-group">
+        <label>Select your current Stat</label>
+        <div class="custom-select" id="customStatSelect">
+          <div class="selected">Fist Strength</div>
+          <div class="options">
+            <div data-value="FS">Fist Strength</div>
+            <div data-value="BT">Body Toughness</div>
+            <div data-value="MS">Movement Speed</div>
+            <div data-value="JF">Jump Force</div>
+            <div data-value="PP">Psychic Power</div>
+          </div>
         </div>
-        <div style="display:flex;gap:10px;align-items:center">
-          <div style="font-weight:900;color:var(--glow-txt);text-shadow:0 0 6px var(--glow-border)">Version 1.3</div>
-          <div style="font-size:12px;color:var(--muted-text)">Made by @arturwol</div>
-
-          <!-- Theme toggle -->
-          <button id="themeToggle" class="theme-btn" aria-pressed="false" title="Toggle theme">
-            <span class="dot" aria-hidden="true"></span>
-            <span id="themeLabel" style="font-weight:900">Dark</span>
-          </button>
-        </div>
-      </header>
-
-      <div class="tabs">
-        <div class="tab active" data-tab="stats" onclick="switchTab(event)">Stats</div>
-        <div class="tab" data-tab="tokens" onclick="switchTab(event)">Tokens</div>
-        <div class="tab" data-tab="about" onclick="switchTab(event)">About</div>
+        <input type="hidden" id="statType" value="FS">
       </div>
-
-      <div class="grid">
-        <!-- STATS -->
-        <div id="stats" class="card" style="display:block">
-          <div class="row" style="align-items:center">
-            <div class="col">
-              <label class="field">Training stat</label>
-              <div class="select" id="statSelect">
-                <div class="input" onclick="toggleOptions('stat')">
-                  <div class="label" id="statSelected"><span class="stat-tag stat-fs">FS</span></div>
-                  <div class="caret">▼</div>
-                </div>
-                <div class="options" id="statOptions" style="display:none">
-                  <div data-val="FS"><span class="stat-tag stat-fs">FS</span> — Fist Strength</div>
-                  <div data-val="BT"><span class="stat-tag stat-bt">BT</span> — Body Toughness</div>
-                  <div data-val="MS"><span class="stat-tag stat-ms">MS</span> — Movement Speed</div>
-                  <div data-val="JF"><span class="stat-tag stat-jf">JF</span> — Jump Force</div>
-                  <div data-val="PP"><span class="stat-tag stat-pp">PP</span> — Psychic Power</div>
-                </div>
-              </div>
-            </div>
-
-            <div style="width:220px">
-              <label class="field">MS tick (only for MS)</label>
-              <div class="input" style="gap:12px;justify-content:flex-start">
-                <label class="checkbox-inline" onclick="selectMsTick(2)">
-                  <div class="checkbox-box" id="ms2-box"></div>
-                  <div style="font-weight:900">2</div>
-                </label>
-                <label class="checkbox-inline" onclick="selectMsTick(3)">
-                  <div class="checkbox-box" id="ms3-box"></div>
-                  <div style="font-weight:900">3</div>
-                </label>
-              </div>
-              <div class="note">Ignored when stat ≠ MS.</div>
-            </div>
+      <div class="form-group" style="display: none;" id="msTickGroup">
+        <label>MS Tick</label>
+        <input type="text" id="MSTick"
+          placeholder="Only for Movement Speed. MS tick are unstable, so you need to choose number. Default 2, in game you can get 3.">
+      </div>
+      <div class="form-group">
+        <label>Stat per Tick</label>
+        <input type="text" id="perTick" placeholder="Write how much you getting this stat, like 2.08k">
+      </div>
+      <div class="form-group">
+        <label>Current Stat</label>
+        <input type="text" id="currentStat" placeholder="Write amount of current stat, like 58.5m">
+      </div>
+      <div class="form-group">
+        <div class="custom-select" id="customStatSelect">
+          <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
+          <div class="options">
+            <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
+            <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
           </div>
-
-          <div style="height:12px"></div>
-
-          <div class="row">
-            <div class="col">
-              <label class="field">Amount per tick (e.g. 2.08k)</label>
-              <div class="input"><input id="perTick" placeholder="How much you get per tick"></div>
-            </div>
-            <div class="col">
-              <label class="field">Current stat</label>
-              <div class="input"><input id="currentStat" placeholder="Current stat (e.g. 58.5m)"></div>
-            </div>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <div class="row">
-            <div class="col">
-              <label class="field">Mode</label>
-              <div class="select" id="goalSelect">
-                <div class="input" onclick="toggleOptions('goal')">
-                  <div class="label" id="goalSelected">Amount to Goal</div>
-                  <div class="caret">▼</div>
-                </div>
-                <div class="options" id="goalOptions" style="display:none">
-                  <div data-val="amount">Amount to Goal</div>
-                  <div data-val="time">Time to Goal</div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <label class="field" id="goalLabel">Enter a target (K/M/B...) or time (1d 2h 30m)</label>
-              <div class="input"><input id="goalValue" placeholder="e.g. 1.5m or 1d 2h"></div>
-            </div>
-          </div>
-
-          <div class="controls">
-            <div class="btn" onclick="calculateStats()">Calculate</div>
-            <div class="btn ghost small" onclick="resetStats()">Reset</div>
-            <div class="btn ghost small" onclick="copyResult('statsResult')">Copy result</div>
-            <div style="flex:1"></div>
-          </div>
-
-          <div class="result" id="statsResult">Your result will appear here.</div>
         </div>
-
-        <!-- TOKENS -->
-        <div id="tokens" class="card" style="display:none">
-          <div class="row">
-            <div class="col">
-              <label class="field">Current tokens</label>
-              <div class="input"><input id="currentTokens" placeholder="e.g. 12.5m"></div>
-            </div>
-
-            <div class="col">
-              <label class="field">Mode</label>
-              <div class="select" id="tokenGoalSelect">
-                <div class="input" onclick="toggleOptions('tokenGoal')">
-                  <div class="label" id="tokenGoalSelected">Amount to Goal</div>
-                  <div class="caret">▼</div>
-                </div>
-                <div class="options" id="tokenGoalOptions" style="display:none">
-                  <div data-val="amount">Amount to Goal</div>
-                  <div data-val="time">Time to Goal</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <label class="field" id="tokenGoalLabel">Enter target tokens or time (1d 2h)</label>
-              <div class="input"><input id="tokenGoalValue" placeholder="e.g. 100k or 2d 3h"></div>
-            </div>
-          </div>
-
-          <div style="height:14px"></div>
-
-          <div class="row">
-            <div class="col">
-              <label class="field">Options</label>
-              <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-                <div class="checkbox-inline" onclick="toggleTokenOpt('daily')">
-                  <div class="checkbox-box" id="daily-box"></div>
-                  <div style="font-weight:800">Daily quests (+60/day)</div>
-                </div>
-                <div class="checkbox-inline" onclick="toggleTokenOpt('weekly')">
-                  <div class="checkbox-box" id="weekly-box"></div>
-                  <div style="font-weight:800">Weekly (+9300/week)</div>
-                </div>
-                <div class="checkbox-inline" onclick="toggleTokenOpt('vip')">
-                  <div class="checkbox-box" id="vip-box"></div>
-                  <div style="font-weight:800">VIP (x2 daily & weekly)</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <label class="field">TPM (fixed)</label>
-              <div class="input">
-                <div style="font-weight:900;color:var(--accent-dark)">5 TPM (fixed)</div>
-              </div>
-            </div>
-
-            <div class="col">
-              <label class="field">Info</label>
-              <div class="input">
-                <div class="note">TPM = 5 tokens/min. Daily and weekly rewards are added separately and can double with
-                  VIP.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="controls">
-            <div class="btn" onclick="calculateTokens()">Calculate</div>
-            <div class="btn ghost small" onclick="resetTokens()">Reset</div>
-            <div class="btn ghost small" onclick="copyResult('tokensResult')">Copy result</div>
-            <div style="flex:1"></div>
-          </div>
-
-          <div class="result" id="tokensResult">Your result will appear here.</div>
-        </div>
-
-        <div id="about" class="card" style="display:none">
-          <h3 style="margin:0 0 8px;color:var(--glow-txt);text-shadow:0 0 6px var(--glow-border)">About</h3>
-          <p class="note">This calculator supports numeric suffixes: K, M, B, T, Qa/Qd (10^15), Qi/Qn (10^18), Sx (10^21),
-            Sp (10^24), Oc (10^27), No (10^30), etc. Time units: D, H, M, S (case-insensitive).</p>
+        <input type="hidden" id="goalType" value="amountToTime">
+        <div class="form-group" style="margin-top: 5px;">
+          <input type="text" id="goalValue" placeholder="Write your goal value here">
         </div>
       </div>
     </div>
 
-    <script>
-      // --- Persistence keys
-      const SAVE_KEY = 'spts_calc_v1';
-      const THEME_KEY = 'spts_theme';
+    <div id="tokens-tab" style="display: none">
+      <div class="form-group">
+        <div class="custom-checkbox" onclick="toggleCheckbox('DailyQuests')">
+          <div class="checkbox-box" id="DailyQuests-box"></div>
+          <span>Daily quests (+60/day)</span>
+        </div>
+        <input type="checkbox" id="DailyQuests" style="display: none;">
+      </div>
+      <div class="form-group">
+        <div class="custom-checkbox" onclick="toggleCheckbox('WeeklyQuests')">
+          <div class="checkbox-box" id="WeeklyQuests-box"></div>
+          <span>Weekly (+9300/week)</span>
+        </div>
+        <input type="checkbox" id="WeeklyQuests" style="display: none;">
+      </div>
+      <div class="form-group">
+        <div class="custom-checkbox" onclick="toggleCheckbox('VIP')">
+          <div class="checkbox-box" id="VIP-box"></div>
+          <span>VIP (x2 daily & weekly)</span>
+        </div>
+        <input type="checkbox" id="VIP" style="display: none;">
+      </div>
+      <div class="form-group">
+        <label>Current Tokens</label>
+        <input type="text" id="currentToken" placeholder="Write amount of current tokens, like 58.5m">
+      </div>
+      <div class="form-group">
+        <div class="custom-select" id="customTokenSelect">
+          <div class="selected">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
+          <div class="options">
+            <div data-value="timeToAmount">Time to Goal(Ex.: 1d 2h 30m 45s)</div>
+            <div data-value="amountToTime">Amount to Goal(Ex.: 1.5m, 900k and etc.)</div>
+          </div>
+        </div>
+        <input type="hidden" id="tokenGoalType" value="amountToTime">
+        <div class="form-group" style="margin-top: 5px;">
+          <input type="text" id="tokenGoalValue" placeholder="Write your goal value here">
+        </div>
+      </div>
+    </div>
 
-      // --- Theme logic
-      function applyTheme(theme) {
-        if (theme === 'dark') {
-          document.body.classList.add('dark');
-          document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
-          document.getElementById('themeLabel').textContent = 'Dark';
-        } else {
-          document.body.classList.remove('dark');
-          document.getElementById('themeToggle').setAttribute('aria-pressed', 'false');
-          document.getElementById('themeLabel').textContent = 'Light';
-        }
-        // update meta theme-color and msapplication tile color dynamically
-        const metaTheme = document.querySelector('meta[name="theme-color"]');
-        const msTile = document.querySelector('meta[name="msapplication-TileColor"]');
-        const computed = getComputedStyle(document.body).getPropertyValue('--bg').trim() || (theme === 'dark' ? '#121212' : '#fffbf6');
-        if (metaTheme) metaTheme.setAttribute('content', computed);
-        if (msTile) msTile.setAttribute('content', computed);
+    <div id="settings-tab" style="display: none">
+      <div class="form-group">
+        <div class="custom-checkbox" onclick="toggleCheckbox('dynamicTimestamp')">
+          <div class="checkbox-box" id="dynamicTimestamp-box"></div>
+          <span>Dynamic Timestamp</span>
+        </div>
+        <input type="checkbox" id="dynamicTimestamp" style="display: none;">
+      </div>
+      <div class="form-group">
+        <div class="custom-checkbox" onclick="toggleCheckbox('lightTheme')">
+          <div class="checkbox-box" id="lightTheme-box"></div>
+          <span>Light Theme</span>
+        </div>
+        <input type="checkbox" id="lightTheme" style="display: none;">
+      </div>
+    </div>
+
+    <button id="Calculate" onclick="calculate()">Calculate</button>
+    <div class="result" id="result"></div>
+    <label>made by @arturwol</label>
+  </div>
+  <script type="module">
+    import { parseNumber, formatNumber, parseTime, formatTime, saveForm, loadForm, updateCustomCheckboxes, updateCustomSelects, updateBackgroundClass } from '../assets/app.js';
+
+    let currentCalculateId = 0;
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('stats-tab').style.display = 'none';
+      document.getElementById('tokens-tab').style.display = 'none';
+      document.getElementById('settings-tab').style.display = 'none';
+      document.getElementById('Calculate').style.display = 'block';
+      document.getElementById('result').style.display = 'block';
+      if (tab === 'stats') {
+        document.getElementById('stats-tab').style.display = 'block';
+        document.querySelectorAll('.tab')[0].classList.add('active');
+        document.querySelector('h1').textContent = 'Stats Calculator';
+        document.querySelector('.tab.active').dataset.key = 'Stats';
+      } else if (tab === 'tokens') {
+        document.getElementById('tokens-tab').style.display = 'block';
+        document.querySelectorAll('.tab')[1].classList.add('active');
+        document.querySelector('h1').textContent = 'Tokens Calculator';
+        document.querySelector('.tab.active').dataset.key = 'Tokens';
+      } else {
+        document.getElementById('settings-tab').style.display = 'block';
+        document.querySelectorAll('.tab')[2].classList.add('active');
+        document.querySelector('h1').textContent = 'Settings';
+        document.getElementById('Calculate').style.display = 'none';
+        document.getElementById('result').style.display = 'none';
+        document.querySelector('.tab.active').dataset.key = 'Settings';
       }
+    }
 
-      function toggleTheme() {
-        const isDark = document.body.classList.contains('dark');
-        const next = isDark ? 'light' : 'dark';
-        applyTheme(next);
-        try { localStorage.setItem(THEME_KEY, next); } catch (e) { }
+    function toggleCheckbox(id) {
+      const checkbox = document.getElementById(id);
+      const box = document.getElementById(id + '-box');
+      checkbox.checked = !checkbox.checked;
+      box.classList.toggle('checked', checkbox.checked);
+      saveForm();
+      if (id === "lightTheme") {
+        const theme = checkbox.checked ? 'light' : 'dark';
+        applyTheme(theme);
+        localStorage.setItem('theme', theme);
       }
+    }
 
-      // attach to button
-      document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('themeToggle');
-        btn.addEventListener('click', toggleTheme);
-        // set default: if user previously saved preference, use it; otherwise default to dark
-        try {
-          const saved = localStorage.getItem(THEME_KEY);
-          if (saved === 'light') applyTheme('light'); else applyTheme('dark');
-        } catch (e) {
-          applyTheme('dark');
-        }
-      });
+    function applyTheme(theme) {
+      document.body.dataset.palette = theme === 'light' ? 'spts_light' : 'spts_dark';
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      const msTile = document.querySelector('meta[name="msapplication-TileColor"]');
+      
+      const computed = getComputedStyle(document.body).getPropertyValue('--bg').trim() || (theme === 'dark' ? '#121212' : '#fffbf6');
+      if (metaTheme) metaTheme.setAttribute('content', computed);
+      if (msTile) msTile.setAttribute('content', computed);
 
-      // --- UI helpers
-      function switchTab(e) {
-        const tab = e.currentTarget.dataset.tab;
-        document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
-        document.getElementById('stats').style.display = tab === 'stats' ? 'block' : 'none';
-        document.getElementById('tokens').style.display = tab === 'tokens' ? 'block' : 'none';
-        document.getElementById('about').style.display = tab === 'about' ? 'block' : 'none';
-      }
+      updateBackgroundClass();
+    }
 
-      function toggleOptions(name) {
-        const map = { stat: 'statOptions', goal: 'goalOptions', tokenGoal: 'tokenGoalOptions' };
-        const el = document.getElementById(map[name]);
-        if (!el) return;
-        const shown = el.style.display === 'block';
-        document.querySelectorAll('.options').forEach(o => o.style.display = 'none');
-        el.style.display = shown ? 'none' : 'block';
-      }
+    async function calculate() {
+      const dynamicTimestamp = document.getElementById('dynamicTimestamp').checked;
+      const myCalculateId = ++currentCalculateId;
 
-      document.querySelectorAll('#statOptions div').forEach(d => d.addEventListener('click', () => {
-        const v = d.dataset.val;
-        const map = { FS: '<span class=\"stat-tag stat-fs\">FS</span>', BT: '<span class=\"stat-tag stat-bt\">BT</span>', MS: '<span class=\"stat-tag stat-ms\">MS</span>', JF: '<span class=\"stat-tag stat-jf\">JF</span>', PP: '<span class=\"stat-tag stat-pp\">PP</span>' };
-        document.getElementById('statSelected').innerHTML = map[v];
-        document.getElementById('statOptions').style.display = 'none';
-        saveForm();
-      }));
+      const activeTab = document.querySelector('.tab.active').dataset.key;
+      let result = '';
+      let resultTitle = '';
 
-      document.querySelectorAll('#goalOptions div').forEach(d => d.addEventListener('click', () => {
-        document.getElementById('goalSelected').textContent = d.textContent;
-        document.getElementById('goalOptions').style.display = 'none';
-        document.getElementById('goalLabel').textContent = d.dataset.val === 'time' ? 'Enter time (d h m s)' : 'Enter target (K/M/B...)';
-        saveForm();
-      }));
-
-      document.querySelectorAll('#tokenGoalOptions div').forEach(d => d.addEventListener('click', () => {
-        document.getElementById('tokenGoalSelected').textContent = d.textContent;
-        document.getElementById('tokenGoalOptions').style.display = 'none';
-        document.getElementById('tokenGoalLabel').textContent = d.dataset.val === 'time' ? 'Enter time (d h m s)' : 'Enter target (K/M/B...)';
-        saveForm();
-      }));
-
-      // MS tick controls
-      let msTick = 2;
-      function selectMsTick(n) { msTick = n; document.getElementById('ms2-box').classList.toggle('checked', n === 2); document.getElementById('ms3-box').classList.toggle('checked', n === 3); saveForm(); }
-      selectMsTick(2);
-
-      // token options
-      const tokenOpts = { daily: false, weekly: false, vip: false };
-      function toggleTokenOpt(name) { tokenOpts[name] = !tokenOpts[name]; document.getElementById(name + '-box').classList.toggle('checked', tokenOpts[name]); saveForm(); }
-
-      // --- Parsing helpers
-      function parseNumber(value) {
-        if (value === null || value === undefined) return 0;
-        value = value.toString().trim().replace(/\s+/g, '').toLowerCase();
-        if (value === '') return 0;
-        value = value.replace(/,/g, '.');
-        const suffixes = { 'k': 1e3, 'm': 1e6, 'b': 1e9, 't': 1e12, 'qa': 1e15, 'qd': 1e15, 'qi': 1e18, 'qn': 1e18, 'sx': 1e21, 'sp': 1e24, 'oc': 1e27, 'no': 1e30 };
-        const match = value.match(/^([\d.]+)([a-z]{0,3})$/);
-        if (!match) return Number(value) || 0;
-        const num = parseFloat(match[1]); const suf = match[2] || ''; const mul = suffixes[suf] || 1; return num * mul;
-      }
-
-      function formatNumber(n) {
-        if (!isFinite(n)) return '—';
-        const neg = n < 0; if (neg) n = -n;
-        const units = ['', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No'];
-        let i = 0; while (n >= 1000 && i < units.length - 1) { n /= 1000; i++; }
-        const str = n.toFixed(2).replace(/\.00$/, ''); return (neg ? '-' : '') + str + units[i];
-      }
-
-      function parseTime(value) {
-        if (!value) return 0;
-        value = value.toString().toLowerCase();
-        const parts = value.match(/(\d+)\s*(d|h|m|s)/gi);
-        if (!parts) return 0; let seconds = 0;
-        for (const p of parts) { const m = p.match(/(\d+)\s*(d|h|m|s)/i); if (!m) continue; const num = parseInt(m[1], 10); const unit = m[2].toLowerCase(); if (unit === 'd') seconds += num * 86400; else if (unit === 'h') seconds += num * 3600; else if (unit === 'm') seconds += num * 60; else if (unit === 's') seconds += num; }
-        return seconds;
-      }
-
-      function formatTime(sec) { sec = Math.max(0, Math.floor(sec)); const d = Math.floor(sec / 86400); sec %= 86400; const h = Math.floor(sec / 3600); sec %= 3600; const m = Math.floor(sec / 60); const s = sec % 60; const parts = []; if (d) parts.push(d + 'd'); if (h || d) parts.push(h + 'h'); if (m || h || d) parts.push(m + 'm'); parts.push(s + 's'); return parts.join(' '); }
-
-      // --- Calculation logic (stats)
-      function calculateStats() {
-        const statHtml = document.getElementById('statSelected').textContent.trim();
-        const stat = statHtml.includes('FS') ? 'FS' : statHtml.includes('BT') ? 'BT' : statHtml.includes('MS') ? 'MS' : statHtml.includes('JF') ? 'JF' : 'PP';
-        const perTickRaw = document.getElementById('perTick').value;
-        const currentRaw = document.getElementById('currentStat').value;
-        const goalMode = document.getElementById('goalSelected').textContent.includes('Amount') ? 'amount' : 'time';
+      if (activeTab === 'Stats') {
+        const statType = document.getElementById('statType').value;
+        const perTick = parseNumber(document.getElementById('perTick').value);
+        const MSTick = parseNumber(document.getElementById('MSTick').value) || 2;
+        const currentStat = parseNumber(document.getElementById('currentStat').value);
+        const goalType = document.getElementById('goalType').value;
         const goalValueRaw = document.getElementById('goalValue').value;
+        const goal = parseNumber(goalValueRaw);
 
-        const perTick = parseNumber(perTickRaw); const current = parseNumber(currentRaw);
-        const tickMap = { FS: 1, BT: 1.25, MS: 2, JF: 1, PP: 1.5 };
-        let selectedTick = tickMap[stat] ?? 1;
-        if (stat === 'MS') selectedTick = msTick; // user choice
+        const statTickMap = {
+          FS: 1,
+          BT: 1.25,
+          MS: MSTick,
+          JF: 1,
+          PP: 1.5
+        };
+        const statTickSeconds = statTickMap[statType] || 1;
 
-        if (!(perTick > 0)) { document.getElementById('statsResult').innerText = 'Please enter a valid \"Amount per tick\" value.'; return; }
+        const tick = statTickSeconds;
+        const gainPerSecond = (perTick||1) / tick;
 
-        const gainPerSecond = perTick / selectedTick; // units per second
-
-        if (goalMode === 'amount') {
+        if (goalType === 'amountToTime') {
           const goal = parseNumber(goalValueRaw);
-          if (goal <= current) { document.getElementById('statsResult').innerText = 'Goal already reached.'; return; }
-          const left = goal - current; const seconds = left / gainPerSecond; const when = new Date(Date.now() + seconds * 1000);
-          document.getElementById('statsResult').innerHTML = `Needed: <strong>${formatNumber(left)}</strong> ${stat} — <br>Time: <strong>${formatTime(seconds)}</strong><br>ETA: <strong>${when.toLocaleString()}</strong>`;
+          const left = goal - currentStat;
+          const seconds = left / gainPerSecond;
+
+          let currentStatEdidable = currentStat;
+          let elapsed = 0;
+
+          const targetDate = new Date(Date.now() + seconds * 1000);
+          const pad = n => n.toString().padStart(2, '0');
+          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
+          resultTitle = `Goal reached at: ${localDateStr}`;
+          if (dynamicTimestamp) {
+            document.getElementById('result').title = resultTitle;
+          }
+
+          if (dynamicTimestamp) {
+            while (currentStatEdidable < goal) {
+              if (myCalculateId !== currentCalculateId) return;
+
+              currentStatEdidable += perTick * tick;
+              elapsed += 1;
+
+              const remaining = Math.max(0, goal - currentStatEdidable);
+              const estimatedRemainingTime = remaining / gainPerSecond;
+
+              result = `Got ${formatNumber(currentStatEdidable)} ${statType} in ${formatTime(elapsed)}, Remaining: ${formatTime(estimatedRemainingTime)}`;
+              document.getElementById('result').innerText = result;
+
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+            result = `Goal reached in ${formatTime(elapsed)}!`;
+          } else {
+            result = `Time to Goal: ${formatTime(seconds)}`;
+          }
         } else {
           const seconds = parseTime(goalValueRaw);
-          if (seconds <= 0) { document.getElementById('statsResult').innerText = 'Please enter a valid time (example: 1d 2h 30m).'; return; }
-          const willGain = gainPerSecond * seconds; const newTotal = current + willGain;
-          document.getElementById('statsResult').innerHTML = `In <strong>${formatTime(seconds)}</strong> you will gain <strong>${formatNumber(willGain)}</strong> ${stat}.<br>Total: <strong>${formatNumber(newTotal)}</strong>`;
+          const gained = gainPerSecond * seconds;
+          result = `You will gain ${formatNumber(gained)} ${statType} in ${formatTime(seconds)}`;
+
+          const targetDate = new Date(Date.now() + seconds * 1000);
+          const pad = n => n.toString().padStart(2, '0');
+          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
+          resultTitle = `You will gain ${formatNumber(gained)} ${statType} at ${localDateStr}`;
         }
-        saveForm();
-      }
 
-      function resetStats() { document.getElementById('perTick').value = ''; document.getElementById('currentStat').value = ''; document.getElementById('goalValue').value = ''; document.getElementById('statsResult').innerText = 'Your result will appear here.'; saveForm(); }
-
-      // --- Tokens calculation
-      function calculateTokens() {
-        const current = parseNumber(document.getElementById('currentTokens').value);
-        const mode = document.getElementById('tokenGoalSelected').textContent.includes('Amount') ? 'amount' : 'time';
-        const v = document.getElementById('tokenGoalValue').value;
+      } else {
+        const DailyQuests = document.getElementById('DailyQuests').checked;
+        const WeeklyQuests = document.getElementById('WeeklyQuests').checked;
+        const VIP = document.getElementById('VIP').checked;
+        const goalType = document.getElementById('tokenGoalType').value;
+        const valueRaw = document.getElementById('tokenGoalValue').value;
+        const currentToken = parseNumber(document.getElementById('currentToken').value);
 
         const tpm = 5; const tps_from_tpm = tpm / 60;
-        let daily = tokenOpts.daily ? 60 : 0; let weekly = tokenOpts.weekly ? 9300 : 0; if (tokenOpts.vip) { daily *= 2; weekly *= 2; }
+        let daily = DailyQuests ? 60 : 0; let weekly = WeeklyQuests ? 9300 : 0; if (VIP) { daily *= 2; weekly *= 2; }
         const dailyPerSec = daily / 86400; const weeklyPerSec = weekly / (7 * 86400); const totalPerSec = tps_from_tpm + dailyPerSec + weeklyPerSec;
 
-        if (mode === 'amount') {
-          const goal = parseNumber(v); if (goal <= current) { document.getElementById('tokensResult').innerText = 'Goal already reached.'; return; }
-          const left = goal - current; if (totalPerSec <= 0) { document.getElementById('tokensResult').innerText = 'Cannot calculate (zero income).'; return; }
-          const seconds = left / totalPerSec; const when = new Date(Date.now() + seconds * 1000);
-          document.getElementById('tokensResult').innerHTML = `Needed: <strong>${formatNumber(left)}</strong> tokens<br>Time: <strong>${formatTime(seconds)}</strong><br>ETA: <strong>${when.toLocaleString()}</strong>`;
+        if (goalType === 'amountToTime') {
+          const goal = parseNumber(valueRaw);
+          const left = goal - currentToken;
+          const totalSeconds = (left / totalPerSec);
+
+          let currentTokenEdidable = currentToken;
+          let elapsed = 0;
+
+          const targetDate = new Date(Date.now() + totalSeconds * 1000);
+          const pad = n => n.toString().padStart(2, '0');
+          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
+          resultTitle = `Goal reached at: ${localDateStr}`;
+
+          if (dynamicTimestamp) {
+            document.getElementById('result').title = resultTitle;
+          }
+
+          if (dynamicTimestamp) {
+            while (currentTokenEdidable < goal) {
+              if (myCalculateId !== currentCalculateId) return;
+
+              currentTokenEdidable += totalPerSec;
+              elapsed += 1;
+
+              const remaining = Math.max(0, goal - currentTokenEdidable);
+              const estimatedRemainingTime = remaining / (totalPerSec);
+
+              result = `Got ${formatNumber(currentTokenEdidable)} Tokens in ${formatTime(elapsed)}, Remaining: ${formatTime(estimatedRemainingTime)}`;
+              document.getElementById('result').innerText = result;
+
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+            result = `Goal reached in ${formatTime(elapsed)}!`;
+          } else {
+            result = `Time to Goal: ${formatTime(totalSeconds)}`;
+          }
         } else {
-          const seconds = parseTime(v); if (seconds <= 0) { document.getElementById('tokensResult').innerText = 'Please enter a valid time (example: 1d 2h).'; return; }
-          const gained = totalPerSec * seconds; const newTotal = current + gained;
-          document.getElementById('tokensResult').innerHTML = `In <strong>${formatTime(seconds)}</strong> you will get <strong>${formatNumber(gained)}</strong> tokens.<br>Total: <strong>${formatNumber(newTotal)}</strong>`;
+          const seconds = parseTime(valueRaw);
+          const totalTokens = (seconds) * totalPerSec;
+          result = `You will gain ${formatNumber(totalTokens)} tokens in ${formatTime(seconds)}`;
+
+          const targetDate = new Date(Date.now() + seconds * 1000);
+          const pad = n => n.toString().padStart(2, '0');
+          const localDateStr = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())} ${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}:${pad(targetDate.getSeconds())}`;
+          resultTitle = `You will gain ${formatNumber(totalTokens)} tokens at ${localDateStr}`;
         }
-        saveForm();
       }
 
-      function resetTokens() { document.getElementById('currentTokens').value = ''; document.getElementById('tokenGoalValue').value = ''; document.getElementById('tokensResult').innerText = 'Your result will appear here.'; saveForm(); }
+      document.getElementById('result').innerText = result;
+      document.getElementById('result').title = resultTitle;
+      saveForm();
+    }
 
-      // copy result helper
-      function copyResult(id) { const txt = document.getElementById(id).innerText; navigator.clipboard?.writeText(txt); alert('Result copied to clipboard'); }
+    window.switchTab = switchTab;
+    window.toggleCheckbox = toggleCheckbox;
+    window.calculate = calculate;
 
-      // --- localStorage: save / load
-      function saveForm() {
-        try {
-          const state = {
-            statHtml: document.getElementById('statSelected').innerHTML,
-            msTick, perTick: document.getElementById('perTick').value, currentStat: document.getElementById('currentStat').value,
-            goalMode: document.getElementById('goalSelected').textContent, goalValue: document.getElementById('goalValue').value,
-            currentTokens: document.getElementById('currentTokens').value, tokenGoalMode: document.getElementById('tokenGoalSelected').textContent, tokenGoalValue: document.getElementById('tokenGoalValue').value,
-            tokenOpts, msTick
-          };
-          localStorage.setItem(SAVE_KEY, JSON.stringify(state));
-        } catch (e) { console.warn('save error', e) }
+    window.onload = () => {
+      loadForm();
+      updateCustomCheckboxes();
+      updateCustomSelects();
+
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        applyTheme(savedTheme);
+        document.getElementById('lightTheme').checked = savedTheme === 'light';
+        document.getElementById('lightTheme-box').classList.toggle('checked', savedTheme === 'light');
       }
 
-      function loadForm() {
-        try {
-          const raw = localStorage.getItem(SAVE_KEY); if (!raw) return;
-          const s = JSON.parse(raw);
-          if (s.statHtml) document.getElementById('statSelected').innerHTML = s.statHtml;
-          if (s.perTick) document.getElementById('perTick').value = s.perTick; if (s.currentStat) document.getElementById('currentStat').value = s.currentStat;
-          if (s.goalMode) document.getElementById('goalSelected').textContent = s.goalMode; if (s.goalValue) document.getElementById('goalValue').value = s.goalValue;
-          if (s.currentTokens) document.getElementById('currentTokens').value = s.currentTokens; if (s.tokenGoalMode) document.getElementById('tokenGoalSelected').textContent = s.tokenGoalMode; if (s.tokenGoalValue) document.getElementById('tokenGoalValue').value = s.tokenGoalValue;
-          if (s.tokenOpts) { Object.assign(tokenOpts, s.tokenOpts); document.getElementById('daily-box').classList.toggle('checked', tokenOpts.daily); document.getElementById('weekly-box').classList.toggle('checked', tokenOpts.weekly); document.getElementById('vip-box').classList.toggle('checked', tokenOpts.vip); }
-          if (s.msTick) { msTick = s.msTick; document.getElementById('ms2-box').classList.toggle('checked', msTick === 2); document.getElementById('ms3-box').classList.toggle('checked', msTick === 3); }
-        } catch (e) { console.warn('load error', e) }
+      const statType = document.getElementById('statType').value;
+      const msTickGroup = document.getElementById('msTickGroup');
+      if (statType === 'MS') {
+        msTickGroup.style.display = 'block';
+      } else {
+        msTickGroup.style.display = 'none';
       }
 
-      // init
-      window.addEventListener('load', () => {
-        // load theme early (we set default to dark unless user saved 'light')
-        try {
-          const saved = localStorage.getItem(THEME_KEY);
-          if (saved === 'light') applyTheme('light'); else applyTheme('dark');
-        } catch (e) {
-          applyTheme('dark');
-        }
-
-        loadForm();
-        // auto save on input
-        document.querySelectorAll('input').forEach(i => i.addEventListener('input', saveForm));
-        // close dropdowns on outside click
-        document.addEventListener('click', (ev) => { if (!ev.target.closest('.select')) document.querySelectorAll('.options').forEach(o => o.style.display = 'none'); });
+      document.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('change', () => {
+          saveForm();
+          if (input.type === 'checkbox') updateCustomCheckboxes();
+        });
       });
-    </script>
-  </body>
+
+      document.querySelectorAll('.custom-select').forEach(select => {
+        const selected = select.querySelector('.selected');
+        const options = select.querySelector('.options');
+        const hiddenInput = select.nextElementSibling;
+
+        const savedValue = hiddenInput.value;
+        const match = options.querySelector(`div[data-value="${savedValue}"]`);
+        if (match) {
+          selected.textContent = match.textContent;
+        }
+
+        selected.addEventListener('click', () => {
+          document.querySelectorAll('.options').forEach(opt => {
+            if (opt !== options) opt.style.display = 'none';
+          });
+          options.style.display = options.style.display === 'block' ? 'none' : 'block';
+        });
+
+        options.querySelectorAll('div').forEach(option => {
+          option.addEventListener('click', () => {
+            selected.textContent = option.textContent;
+            hiddenInput.value = option.getAttribute('data-value');
+            options.style.display = 'none';
+            saveForm();
+
+            const msTickGroup = document.getElementById('msTickGroup');
+              if (hiddenInput.value === 'MS') {
+                msTickGroup.style.display = 'block';
+              } else {
+                msTickGroup.style.display = 'none';
+              }
+          });
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.custom-select')) {
+          document.querySelectorAll('.options').forEach(opt => opt.style.display = 'none');
+        }
+      });
+    };
+  </script>
+</body>
+
 </html>
